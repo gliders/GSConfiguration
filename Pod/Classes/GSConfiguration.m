@@ -3,9 +3,11 @@
 //
 
 #import "GSConfiguration.h"
+#import "RTProperty.h"
+#import "MARTNSObject.h"
 
 #define GENERATE_NSNUMBER_GETTER(typeName, upperTypeName) \
-- (typeName)getRemote##upperTypeName { \
+- (typeName)getConfig##upperTypeName { \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     typeName value = [[self.propValueStore objectForKey:property.name] typeName##Value]; \
     NSLog(@"getter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
@@ -13,7 +15,7 @@
 }
 
 #define GENERATE_NSNUMBER_SETTER(typeName, upperTypeName) \
-- (void)setRemote##upperTypeName:(typeName)value { \
+- (void)setConfig##upperTypeName:(typeName)value { \
     NSLog(@"setter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     NSNumber *number = [NSNumber numberWith##upperTypeName:value]; \
@@ -36,7 +38,6 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     self = [super init];
     if (self) {
         self.propValueStore = [NSMutableDictionary dictionary];
-
     }
 
     return self;
@@ -44,6 +45,35 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
 
 - (BOOL)containsKey:(NSString *)key {
     return NO;
+}
+
+- (void)setConfigObject:(id)value {
+    NSLog(@"setter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
+    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
+
+    // TODO: support copy attribute and other semantics (?)
+
+    if (property.isWeakReference) {
+        value = [NSValue valueWithNonretainedObject:value];
+    } else if (!value) {
+        value = [NSNull null];
+    }
+
+    [self.propValueStore setObject:value forKey:property.name];
+}
+
+- (id)getConfigObject {
+    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
+    id value = [self.propValueStore objectForKey:property.name];
+
+    if (property.isWeakReference) {
+        value = [value nonretainedObjectValue];
+    } else if ([value isKindOfClass:[NSNull class]]) {
+        value = nil;
+    }
+
+    NSLog(@"getter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
+    return value;
 }
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
@@ -54,6 +84,7 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
         NSLog(@"attempting to add method %@, sel = %@", property.name, NSStringFromSelector(sel));
         [self addMethodForSelector:sel property:property isSetter:isSetter];
 
+        // TODO: What am I doing with the custom getter/setter?
         if (property.customGetter) {
             [self instanceMethodForSelector:property.customGetter];
         }
@@ -77,31 +108,31 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     if (isSetter) {
         switch (type) {
             case '@': {
-                subSel = @selector(setRemoteObject:);
+                subSel = @selector(setConfigObject:);
                 break;
             }
             case 'c': {
-                subSel = @selector(setRemoteChar:);
+                subSel = @selector(setConfigChar:);
                 break;
             }
             case 's': {
-                subSel = @selector(setRemoteShort:);
+                subSel = @selector(setConfigShort:);
                 break;
             }
             case 'i': {
-                subSel = @selector(setRemoteInt:);
+                subSel = @selector(setConfigInt:);
                 break;
             }
             case 'l': {
-                subSel = @selector(setRemoteLong:);
+                subSel = @selector(setConfigLong:);
                 break;
             }
             case 'f': {
-                subSel = @selector(setRemoteFloat:);
+                subSel = @selector(setConfigFloat:);
                 break;
             }
             case 'd': {
-                subSel = @selector(setRemoteDouble:);
+                subSel = @selector(setConfigDouble:);
                 break;
             }
             default: break;
@@ -110,31 +141,31 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     } else {
         switch (type) {
             case '@': {
-                subSel = @selector(getRemoteObject);
+                subSel = @selector(getConfigObject);
                 break;
             }
             case 'c': {
-                subSel = @selector(getRemoteChar);
+                subSel = @selector(getConfigChar);
                 break;
             }
             case 's': {
-                subSel = @selector(getRemoteShort);
+                subSel = @selector(getConfigShort);
                 break;
             }
             case 'i': {
-                subSel = @selector(getRemoteInt);
+                subSel = @selector(getConfigInt);
                 break;
             }
             case 'l': {
-                subSel = @selector(getRemoteLong);
+                subSel = @selector(getConfigLong);
                 break;
             }
             case 'f': {
-                subSel = @selector(getRemoteFloat);
+                subSel = @selector(getConfigFloat);
                 break;
             }
             case 'd': {
-                subSel = @selector(getRemoteDouble);
+                subSel = @selector(getConfigDouble);
                 break;
             }
             default: break;
@@ -169,6 +200,7 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 }
                 return prop;
             } else if (prop.isDynamic && strcmp(sel_getName(prop.customSetter), sel_getName(sel)) == 0) {
+                // TODO: Why am I setting this? Seems redundant...
                 if (isSetter) {
                     *isSetter = YES;
                 }
