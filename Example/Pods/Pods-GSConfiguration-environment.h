@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_GSConfiguration 1
 #define COCOAPODS_VERSION_PATCH_GSConfiguration 0
 
+// MAObjCRuntime
+#define COCOAPODS_POD_AVAILABLE_MAObjCRuntime
+#define COCOAPODS_VERSION_MAJOR_MAObjCRuntime 0
+#define COCOAPODS_VERSION_MINOR_MAObjCRuntime 0
+#define COCOAPODS_VERSION_PATCH_MAObjCRuntime 1
+
 // Specta
 #define COCOAPODS_POD_AVAILABLE_Specta
 #define COCOAPODS_VERSION_MAJOR_Specta 0

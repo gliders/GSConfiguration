@@ -1,6 +1,8 @@
 PODS:
   - Expecta (0.3.1)
-  - GSConfiguration (0.1.0)
+  - GSConfiguration (0.1.0):
+    - MAObjCRuntime (~> 0.0.1)
+  - MAObjCRuntime (0.0.1)
   - Specta (0.2.1)
 
 DEPENDENCIES:
@@ -14,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  GSConfiguration: e8f54fe02296d1861b65af49c8b3ba4841b917f1
+  GSConfiguration: f9b2ff61e072d4d1a38507f6f211d7497e5f645b
+  MAObjCRuntime: 9e99082c438f06c209203dbd77083cc308d9216a
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 
 COCOAPODS: 0.33.1
