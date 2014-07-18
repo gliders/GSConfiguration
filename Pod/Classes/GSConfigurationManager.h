@@ -5,10 +5,11 @@
 #import <Foundation/Foundation.h>
 
 @class GSConfiguration;
+@protocol GSConfigurationStore;
 
 @interface GSConfigurationManager : NSObject
 
-+ (void)addConfig:(GSConfiguration *)config;
++ (void)setConfigStore:(id<GSConfigurationStore>)config;
 + (id)configValueForKey:(NSString *)key;
 + (void)setConfigValue:(id)value forKey:(NSString *)key;
 

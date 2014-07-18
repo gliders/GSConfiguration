@@ -3,7 +3,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSConfiguration.h"
 
-@interface GSConfigurationPList : GSConfiguration
+@protocol GSConfigurationLoader <NSObject>
+
+
+
 @end

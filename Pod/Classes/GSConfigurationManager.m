@@ -3,12 +3,13 @@
 //
 
 #import "GSConfigurationManager.h"
-#import "GSConfiguration.h"
+#import "GSUserDefaultsStore.h"
+#import "GSConfigurationStore.h"
 
 @interface GSConfigurationManager ()
 
-@property (nonatomic, strong) NSMutableArray *configs;
-@property (nonatomic, strong) NSMutableDictionary *defaultStore;
+@property (nonatomic, strong) NSMutableArray *configLoaders;
+@property (nonatomic, strong) id<GSConfigurationStore> defaultStore;
 
 @end
 
@@ -17,56 +18,30 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.configs = [NSMutableArray array];
-        self.defaultStore = [NSMutableDictionary dictionary];
+        self.configLoaders = [NSMutableArray array];
+        self.defaultStore = [[GSUserDefaultsStore alloc] init];
     }
 
     return self;
 }
 
-- (void)addConfig:(GSConfiguration *)config {
-    [self.configs addObject:config];
-
-    if (config.priority) {
-        [self.configs sortUsingComparator:^NSComparisonResult(GSConfiguration *config1, GSConfiguration *config2) {
-            if ([config1.priority intValue] > config2.priority.intValue) {
-                return NSOrderedDescending;
-            } else if ([config1.priority intValue] < config2.priority.intValue) {
-                return NSOrderedAscending;
-            }
-
-            return NSOrderedSame;
-        }];
-    }
+- (void)setConfigStore:(id<GSConfigurationStore>)configStore {
+    self.defaultStore = configStore;
 }
 
 - (id)configValueForKey:(NSString *)key {
-    for (GSConfiguration *config in self.configs) {
-        id value = [config valueForKey:key];
-        if (value) {
-            return value;
-        }
-    }
-
     return [self.defaultStore objectForKey:key];
 }
 
 - (void)setConfigValue:(id)value forKey:(NSString *)key {
-    for (GSConfiguration *config in self.configs) {
-        if ([config containsKey:key]) {
-            [config setValue:value forKey:key];
-            return;
-        }
-    }
-
     [self.defaultStore setObject:value forKey:key];
 }
 
 #pragma mark Class Convenience Methods
 
-+ (void)addConfig:(GSConfiguration *)config {
++ (void)setConfigStore:(id<GSConfigurationStore>)config {
     GSConfigurationManager *manager = [self shared];
-    [manager addConfig:config];
+    [manager setConfigStore:config];
 }
 
 + (id)configValueForKey:(NSString *)key {

@@ -5,11 +5,12 @@
 #import "GSConfiguration.h"
 #import "RTProperty.h"
 #import "MARTNSObject.h"
+#import "GSConfigurationManager.h"
 
 #define GENERATE_NSNUMBER_GETTER(typeName, upperTypeName) \
 - (typeName)getConfig##upperTypeName { \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
-    typeName value = [[self.propValueStore objectForKey:property.name] typeName##Value]; \
+    typeName value = [[GSConfigurationManager configValueForKey:property.name] typeName##Value]; \
     NSLog(@"getter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
     return value; \
 }
@@ -19,33 +20,14 @@
     NSLog(@"setter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     NSNumber *number = [NSNumber numberWith##upperTypeName:value]; \
-    [self.propValueStore setObject:number forKey:property.name]; \
+    [GSConfigurationManager setConfigValue:number forKey:property.name]; \
 }
 
 #define GENERATE_NSNUMBER_ACCESSORS(typeName, upperTypeName)\
 GENERATE_NSNUMBER_GETTER(typeName, upperTypeName)\
 GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
 
-@interface GSConfiguration ()
-
-@property (nonatomic, strong) NSMutableDictionary *propValueStore;
-
-@end
-
 @implementation GSConfiguration
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.propValueStore = [NSMutableDictionary dictionary];
-    }
-
-    return self;
-}
-
-- (BOOL)containsKey:(NSString *)key {
-    return NO;
-}
 
 - (void)setConfigObject:(id)value {
     NSLog(@"setter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
@@ -59,12 +41,12 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
         value = [NSNull null];
     }
 
-    [self.propValueStore setObject:value forKey:property.name];
+    [GSConfigurationManager setConfigValue:value forKey:property.name];
 }
 
 - (id)getConfigObject {
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
-    id value = [self.propValueStore objectForKey:property.name];
+    id value = [GSConfigurationManager configValueForKey:property.name];
 
     if (property.isWeakReference) {
         value = [value nonretainedObjectValue];

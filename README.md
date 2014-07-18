@@ -1,6 +1,6 @@
 # GSConfiguration
 
-[![CI Status](http://img.shields.io/travis/Ryan Brignoni/GSConfiguration.svg?style=flat)](https://travis-ci.org/Ryan Brignoni/GSConfiguration)
+[![CI Status](http://img.shields.io/travis/gliders/GSConfiguration.svg?style=flat)](https://travis-ci.org/gliders/GSConfiguration)
 [![Version](https://img.shields.io/cocoapods/v/GSConfiguration.svg?style=flat)](http://cocoadocs.org/docsets/GSConfiguration)
 [![License](https://img.shields.io/cocoapods/l/GSConfiguration.svg?style=flat)](http://cocoadocs.org/docsets/GSConfiguration)
 [![Platform](https://img.shields.io/cocoapods/p/GSConfiguration.svg?style=flat)](http://cocoadocs.org/docsets/GSConfiguration)
