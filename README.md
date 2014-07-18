@@ -20,7 +20,7 @@ it, simply add the following line to your Podfile:
 
 ## Author
 
-Ryan Brignoni, castral01@gmail.com
+Ryan Brignoni
 
 ## License
 
