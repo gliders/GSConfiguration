@@ -1,4 +1,3 @@
-
 target 'GSConfiguration', :exclusive => true do
   pod "GSConfiguration", :path => "../"
 
