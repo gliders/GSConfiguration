@@ -1,0 +1,1 @@
+../../../../Pod/Classes/GSConfigurationStore.h
