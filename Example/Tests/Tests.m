@@ -6,12 +6,29 @@
 //  Copyright (c) 2014 Ryan Brignoni. All rights reserved.
 //
 
+#import "GSConfiguration.h"
+
+@interface TestConfig : GSConfiguration
+
+@property (nonatomic) NSURL *value;
+
+@end
+
+@implementation TestConfig
+
+@dynamic value;
+
+@end
+
 SpecBegin(InitialSpecs)
 
 describe(@"these will pass", ^{
     
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
+    it(@"can set and retrieve integers", ^{
+        TestConfig *config = TestConfig.new;
+        NSURL *x = [NSURL URLWithString:@"http://example.com"];
+        config.value = x;
+        expect(config.value).equal(x);
     });
     
     it(@"can read", ^{

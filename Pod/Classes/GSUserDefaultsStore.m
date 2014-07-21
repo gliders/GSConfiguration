@@ -33,4 +33,12 @@
     return ([self.propValueStore objectForKey:key] != nil);
 }
 
+- (void)setConfigObject:(id)value forKey:(NSString *)key {
+    [self.propValueStore setObject:value forKey:key];
+}
+
+- (id)configObjectForKey:(NSString *)key {
+    return [self.propValueStore objectForKey:key];
+}
+
 @end

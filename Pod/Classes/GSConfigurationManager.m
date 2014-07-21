@@ -30,11 +30,11 @@
 }
 
 - (id)configValueForKey:(NSString *)key {
-    return [self.defaultStore objectForKey:key];
+    return [self.defaultStore configObjectForKey:key];
 }
 
 - (void)setConfigValue:(id)value forKey:(NSString *)key {
-    [self.defaultStore setObject:value forKey:key];
+    [self.defaultStore setConfigObject:value forKey:key];
 }
 
 #pragma mark Class Convenience Methods

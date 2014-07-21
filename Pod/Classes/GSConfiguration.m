@@ -23,8 +23,20 @@
     [GSConfigurationManager setConfigValue:number forKey:property.name]; \
 }
 
+#define GENERATE_UNSIGNED_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName) \
+- (typeName)getConfig##upperTypeName { \
+    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
+    typeName value = [[GSConfigurationManager configValueForKey:property.name] nsNumberName##Value]; \
+    NSLog(@"getter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
+    return value; \
+}
+
 #define GENERATE_NSNUMBER_ACCESSORS(typeName, upperTypeName)\
 GENERATE_NSNUMBER_GETTER(typeName, upperTypeName)\
+GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
+
+#define GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(typeName, upperTypeName, nsNumberName)\
+GENERATE_UNSIGNED_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)\
 GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
 
 @implementation GSConfiguration
@@ -97,16 +109,32 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 subSel = @selector(setConfigChar:);
                 break;
             }
+            case 'C': {
+                subSel = @selector(setConfigUnsignedChar:);
+                break;
+            }
             case 's': {
                 subSel = @selector(setConfigShort:);
+                break;
+            }
+            case 'S': {
+                subSel = @selector(setConfigUnsignedShort:);
                 break;
             }
             case 'i': {
                 subSel = @selector(setConfigInt:);
                 break;
             }
+            case 'I': {
+                subSel = @selector(setConfigUnsignedInt:);
+                break;
+            }
             case 'l': {
                 subSel = @selector(setConfigLong:);
+                break;
+            }
+            case 'L': {
+                subSel = @selector(setConfigUnsignedLong:);
                 break;
             }
             case 'f': {
@@ -117,7 +145,10 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 subSel = @selector(setConfigDouble:);
                 break;
             }
-            default: break;
+            default: {
+                NSLog(@"unknown type %c", type);
+                break;
+            }
         }
         impEncoding = [[NSString stringWithFormat:@"v@:%c", type] cStringUsingEncoding:NSASCIIStringEncoding];
     } else {
@@ -130,16 +161,32 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 subSel = @selector(getConfigChar);
                 break;
             }
+            case 'C': {
+                subSel = @selector(getConfigUnsignedChar);
+                break;
+            }
             case 's': {
                 subSel = @selector(getConfigShort);
+                break;
+            }
+            case 'S': {
+                subSel = @selector(getConfigUnsignedShort);
                 break;
             }
             case 'i': {
                 subSel = @selector(getConfigInt);
                 break;
             }
+            case 'I': {
+                subSel = @selector(getConfigUnsignedInt);
+                break;
+            }
             case 'l': {
                 subSel = @selector(getConfigLong);
+                break;
+            }
+            case 'L': {
+                subSel = @selector(getConfigUnsignedLong);
                 break;
             }
             case 'f': {
@@ -150,7 +197,10 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 subSel = @selector(getConfigDouble);
                 break;
             }
-            default: break;
+            default: {
+                NSLog(@"unknown type %c", type);
+                break;
+            }
         }
         impEncoding = [[NSString stringWithFormat:@"%c@:", type] cStringUsingEncoding:NSASCIIStringEncoding];
     }
@@ -182,7 +232,6 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 }
                 return prop;
             } else if (prop.isDynamic && strcmp(sel_getName(prop.customSetter), sel_getName(sel)) == 0) {
-                // TODO: Why am I setting this? Seems redundant...
                 if (isSetter) {
                     *isSetter = YES;
                 }
@@ -201,6 +250,9 @@ GENERATE_NSNUMBER_ACCESSORS(long, Long)
 GENERATE_NSNUMBER_ACCESSORS(float, Float)
 GENERATE_NSNUMBER_ACCESSORS(double, Double)
 
-// TODO: BOOL accessors
+GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned char, UnsignedChar, unsignedChar)
+GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned short, UnsignedShort, unsignedShort)
+GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned int, UnsignedInt, unsignedInt)
+GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned long, UnsignedLong, unsignedLong)
 
 @end
