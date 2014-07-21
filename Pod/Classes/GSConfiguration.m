@@ -45,10 +45,11 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     NSLog(@"setter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
 
-    // TODO: support copy attribute and other semantics (?)
-
+    BOOL setWithCopy = [[property.attributes objectForKey:RTPropertyCopyAttribute] boolValue];
     if (property.isWeakReference) {
         value = [NSValue valueWithNonretainedObject:value];
+    } else if (setWithCopy) {
+        value = [value copy];
     } else if (!value) {
         value = [NSNull null];
     }
@@ -77,15 +78,6 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     if (property) {
         NSLog(@"attempting to add method %@, sel = %@", property.name, NSStringFromSelector(sel));
         [self addMethodForSelector:sel property:property isSetter:isSetter];
-
-        // TODO: What am I doing with the custom getter/setter?
-        if (property.customGetter) {
-            [self instanceMethodForSelector:property.customGetter];
-        }
-
-        if (property.customSetter) {
-            [self instanceMethodForSelector:property.customSetter];
-        }
 
         return YES;
     }

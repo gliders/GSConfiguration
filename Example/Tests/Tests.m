@@ -10,13 +10,13 @@
 
 @interface TestConfig : GSConfiguration
 
-@property (nonatomic) NSURL *value;
+@property (getter=isConnected, setter=setConnected:) BOOL connect;
 
 @end
 
 @implementation TestConfig
 
-@dynamic value;
+@dynamic connect;
 
 @end
 
@@ -26,9 +26,9 @@ describe(@"these will pass", ^{
     
     it(@"can set and retrieve integers", ^{
         TestConfig *config = TestConfig.new;
-        NSURL *x = [NSURL URLWithString:@"http://example.com"];
-        config.value = x;
-        expect(config.value).equal(x);
+        BOOL x = YES;
+        [config setConnected:x];
+        expect([config isConnected]).equal(YES);
     });
     
     it(@"can read", ^{

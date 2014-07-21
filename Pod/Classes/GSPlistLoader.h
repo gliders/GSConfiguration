@@ -3,9 +3,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSConfigurationLoader.h"
+#import "GSBaseLoader.h"
 
-@interface GSPlistLoader : NSObject <GSConfigurationLoader>
+@interface GSPlistLoader : GSBaseLoader
 
 @property (nonatomic, copy, readonly) NSString *plistName;
 @property (nonatomic, readonly) BOOL syncWithUserDefaults; // Defaults to YES.

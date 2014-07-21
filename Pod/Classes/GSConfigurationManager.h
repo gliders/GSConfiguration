@@ -4,10 +4,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class GSConfiguration;
 @protocol GSConfigurationStore;
+@class GSConfiguration;
+@class GSBaseLoader;
 
 @interface GSConfigurationManager : NSObject
+
+#pragma mark Configuration Loader Methods
+
++(void)addLoader:(GSBaseLoader *)loader;
+
+#pragma mark Configuration Storage Methods
 
 + (void)setConfigStore:(id<GSConfigurationStore>)config;
 + (id)configValueForKey:(NSString *)key;

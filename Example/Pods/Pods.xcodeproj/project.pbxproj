@@ -17,6 +17,7 @@
 		0923F5D71D64430B86D476A3 /* EXPBackwardCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F8F47A4191A4991A8AF753C /* EXPBackwardCompatibility.h */; };
 		0CA214B88B844138B71AB198 /* EXPMatchers+beGreaterThanOrEqualTo.h in Headers */ = {isa = PBXBuildFile; fileRef = D46A08E8687C413DBED87F38 /* EXPMatchers+beGreaterThanOrEqualTo.h */; };
 		0FFACC2232FE4D9FA0C6B60B /* libPods-GSConfiguration-Specta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D58CD6F51847465D9CCBB138 /* libPods-GSConfiguration-Specta.a */; };
+		123EF98B5783749924612A20 /* GSBaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 123EF544143B5680A1751D68 /* GSBaseLoader.m */; };
 		16998B675C684E99A1844A12 /* Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = F153BDB71CD44EDBA50DB97F /* Expecta.h */; };
 		17CD979DE30A42B9B330CCF2 /* EXPMatchers+raiseWithReason.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9858F5FF81488587325721 /* EXPMatchers+raiseWithReason.m */; };
 		19E7ACF77A4A4042941B0455 /* EXPBlockDefinedMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = E13141E39ABE487694BED679 /* EXPBlockDefinedMatcher.h */; };
@@ -54,7 +55,6 @@
 		49B895F1F28342188604CE88 /* EXPMatchers+beInstanceOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 000220FD243A483CBB3FA2E6 /* EXPMatchers+beInstanceOf.m */; };
 		49DC1CAD2E634E52A0ACDC2B /* RTIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6050998926F943D79F04EDF7 /* RTIvar.m */; };
 		4CA3AF291E3B4C618745BC85 /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = A94A0385C1C044FFABCF876E /* EXPMatchers+beTruthy.m */; };
-		4D317658FA1F4A3DB8A91CEF /* GSConfigurationLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7D53BF4D4DA78F00A8C1 /* GSConfigurationLoader.h */; };
 		4D36D2679E894D7399C861B0 /* EXPMatchers+beInstanceOf.h in Headers */ = {isa = PBXBuildFile; fileRef = C17B210EF056446DBB372CC7 /* EXPMatchers+beInstanceOf.h */; };
 		51D64745B88C4B45B3148551 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 327BE4FC4B2143798B315E58 /* EXPMatcherHelpers.m */; };
 		538C68CF42A44ED289286F1E /* EXPMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6AC095C9DB448EB8484189 /* EXPMatchers.h */; };
@@ -198,6 +198,8 @@
 		0C71839F16A04EE38B0CCAE7 /* EXPMatchers+beginWith.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beginWith.h"; path = "src/matchers/EXPMatchers+beginWith.h"; sourceTree = "<group>"; };
 		0FEA7212B4C64B80B5CE8751 /* EXPFloatTuple.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXPFloatTuple.m; path = src/EXPFloatTuple.m; sourceTree = "<group>"; };
 		10F1A4638ECC4EA8A3BCEC43 /* EXPMatchers+beCloseTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beCloseTo.h"; path = "src/matchers/EXPMatchers+beCloseTo.h"; sourceTree = "<group>"; };
+		123EF544143B5680A1751D68 /* GSBaseLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSBaseLoader.m; path = Pod/Classes/GSBaseLoader.m; sourceTree = "<group>"; };
+		123EF9647F865DE38E8E26A2 /* GSBaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSBaseLoader.h; path = Pod/Classes/GSBaseLoader.h; sourceTree = "<group>"; };
 		12857E6A71384F46B9114FD1 /* EXPMatchers+beSupersetOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beSupersetOf.h"; path = "src/matchers/EXPMatchers+beSupersetOf.h"; sourceTree = "<group>"; };
 		13F7D91AB31B48D2AF2A29FE /* SPTReporter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SPTReporter.h; path = src/SPTReporter.h; sourceTree = "<group>"; };
 		162A5F649A1044F28D489E7F /* Pods-GSConfiguration-GSConfiguration-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GSConfiguration-GSConfiguration-Private.xcconfig"; sourceTree = "<group>"; };
@@ -338,7 +340,6 @@
 		F8A157EA39B34FACA7BF3156 /* EXPMatchers+beNil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beNil.m"; path = "src/matchers/EXPMatchers+beNil.m"; sourceTree = "<group>"; };
 		FB177FF5F09241D296459341 /* EXPMatcherHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatcherHelpers.h; path = src/matchers/EXPMatcherHelpers.h; sourceTree = "<group>"; };
 		FB97634FC8F84F239A640BDD /* SPTNestedReporter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SPTNestedReporter.h; path = src/SPTNestedReporter.h; sourceTree = "<group>"; };
-		FD0E7D53BF4D4DA78F00A8C1 /* GSConfigurationLoader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GSConfigurationLoader.h; path = Pod/Classes/GSConfigurationLoader.h; sourceTree = "<group>"; };
 		FE3C4E6389C9443992AB1F9A /* Pods-GSConfiguration-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GSConfiguration-dummy.m"; sourceTree = "<group>"; };
 		FE7C3500B2DB43338D0B09FB /* EXPMatchers+beIdenticalTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beIdenticalTo.h"; path = "src/matchers/EXPMatchers+beIdenticalTo.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,7 +398,6 @@
 			children = (
 				A09A3618C3ED4143B29E51DD /* GSConfiguration.h */,
 				05722425463943A3A103CFBD /* GSConfiguration.m */,
-				FD0E7D53BF4D4DA78F00A8C1 /* GSConfigurationLoader.h */,
 				36FA63FF06FF4BD5A73E0710 /* GSConfigurationManager.h */,
 				4794EB16DB1E457F9DE128D5 /* GSConfigurationManager.m */,
 				515DAC44C13A41DC9A6A9104 /* GSConfigurationStore.h */,
@@ -408,6 +408,8 @@
 				1DFC9FE4C1904B95A9FA33CC /* GSUserDefaultsStore.h */,
 				90170443D71C4729BA0FFD22 /* GSUserDefaultsStore.m */,
 				F6D3243706984A3895311471 /* Support Files */,
+				123EF9647F865DE38E8E26A2 /* GSBaseLoader.h */,
+				123EF544143B5680A1751D68 /* GSBaseLoader.m */,
 			);
 			name = GSConfiguration;
 			path = ../..;
@@ -706,7 +708,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CC62A1229B542758A755B6E /* GSConfiguration.h in Headers */,
-				4D317658FA1F4A3DB8A91CEF /* GSConfigurationLoader.h in Headers */,
 				E37FDCA5496945E79303F7ED /* GSConfigurationManager.h in Headers */,
 				6A30829AF706479A95877E84 /* GSConfigurationStore.h in Headers */,
 				9FF4EAD9744E4023B3EFE875 /* GSPlistLoader.h in Headers */,
@@ -944,6 +945,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C1C825B9DE543FABF4B2049 /* Pods-GSConfiguration-dummy.m in Sources */,
+				123EF98B5783749924612A20 /* GSBaseLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

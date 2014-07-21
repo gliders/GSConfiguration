@@ -3,9 +3,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSConfigurationLoader.h"
+#import "GSBaseLoader.h"
 
-@interface GSRemoteLoader : NSObject <GSConfigurationLoader>
+@interface GSRemoteLoader : GSBaseLoader
 
 @property (nonatomic, strong, readonly) NSURL *endpoint;
 @property (nonatomic) BOOL refreshPeriodically;

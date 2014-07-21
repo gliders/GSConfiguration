@@ -4,7 +4,7 @@
 
 #import "GSConfigurationManager.h"
 #import "GSUserDefaultsStore.h"
-#import "GSConfigurationStore.h"
+#import "GSBaseLoader.h"
 
 @interface GSConfigurationManager ()
 
@@ -25,6 +25,14 @@
     return self;
 }
 
+#pragma mark Configuration Loader Methods
+
+- (void)addLoader:(GSBaseLoader *)loader {
+    [self.configLoaders addObject:loader];
+}
+
+#pragma mark Configuration Storage Methods
+
 - (void)setConfigStore:(id<GSConfigurationStore>)configStore {
     self.defaultStore = configStore;
 }
@@ -38,6 +46,11 @@
 }
 
 #pragma mark Class Convenience Methods
+
++ (void)addLoader:(GSBaseLoader *)loader {
+    GSConfigurationManager *manager = [self shared];
+    [manager addLoader:loader];
+}
 
 + (void)setConfigStore:(id<GSConfigurationStore>)config {
     GSConfigurationManager *manager = [self shared];
