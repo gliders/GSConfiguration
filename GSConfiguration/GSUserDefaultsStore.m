@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)initializeStoreWithDefaults:(NSDictionary *)defaults {
+- (void)setStoreDefaults:(NSDictionary *)defaults {
     if (!self.isInitialized) {
         [self.userDefaults registerDefaults:defaults];
 
@@ -36,11 +36,11 @@
 }
 
 - (void)setConfigObject:(id)value forKey:(NSString *)key {
-
+    [self.userDefaults setObject:value forKey:key];
 }
 
 - (id)configObjectForKey:(NSString *)key {
-    return nil;
+    return [self.userDefaults objectForKey:key];
 }
 
 - (void)flush {

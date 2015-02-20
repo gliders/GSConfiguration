@@ -7,7 +7,7 @@
 @protocol GSStore <NSObject>
 
 @required
-- (void)initializeStoreWithDefaults:(NSDictionary *)defaults;
+- (void)setStoreDefaults:(NSDictionary *)defaults;
 - (BOOL)containsKey:(NSString *)key;
 - (void)setConfigWithDictionary:(NSDictionary *)values;
 - (void)setConfigObject:(id)value forKey:(NSString *)key;

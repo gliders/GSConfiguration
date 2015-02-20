@@ -7,8 +7,8 @@
 
 @interface GSDictionarySource : GSSource
 
-- (instancetype)initWithData:(NSDictionary *)data;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-+ (instancetype)sourceWithData:(NSDictionary *)data;
++ (instancetype)sourceWithDictionary:(NSDictionary *)dictionary;
 
 @end

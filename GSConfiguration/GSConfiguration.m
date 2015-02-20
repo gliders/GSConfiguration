@@ -3,50 +3,42 @@
 //
 
 #import "GSConfiguration.h"
-#import "RTProperty.h"
-#import "MARTNSObject.h"
+#import "ThirdParty/MAObjCRuntime/RTProperty.h"
+#import "ThirdParty/MAObjcRuntime/MARTNSObject.h"
 #import "GSConfigurationManager.h"
-#import "GSConfigurationManager+Store.h"
-
-#define GENERATE_NSNUMBER_GETTER(typeName, upperTypeName) \
-- (typeName)getConfig##upperTypeName { \
-    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
-    typeName value = [[GSConfigurationManager configValueForKey:property.name] typeName##Value]; \
-    NSLog(@"getter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
-    return value; \
-}
 
 #define GENERATE_NSNUMBER_SETTER(typeName, upperTypeName) \
 - (void)setConfig##upperTypeName:(typeName)value { \
-    NSLog(@"setter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     NSNumber *number = [NSNumber numberWith##upperTypeName:value]; \
     [GSConfigurationManager setConfigValue:number forKey:property.name]; \
 }
 
-#define GENERATE_UNSIGNED_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName) \
+#define GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName) \
 - (typeName)getConfig##upperTypeName { \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     typeName value = [[GSConfigurationManager configValueForKey:property.name] nsNumberName##Value]; \
-    NSLog(@"getter SEL = %@ value %f", NSStringFromSelector(_cmd), value); \
     return value; \
 }
 
-#define GENERATE_NSNUMBER_ACCESSORS(typeName, upperTypeName)\
-GENERATE_NSNUMBER_GETTER(typeName, upperTypeName)\
-GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
+#define GENERATE_NSNUMBER_GETTER(typeName, upperTypeName) GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, typeName)
 
-#define GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(typeName, upperTypeName, nsNumberName)\
-GENERATE_UNSIGNED_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)\
-GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
+#define GENERATE_NSNUMBER_ACCESSORS(typeName, upperTypeName)\
+GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)\
+GENERATE_NSNUMBER_GETTER(typeName, upperTypeName)
+
+#define GENERATE_COMPLEX_NSNUMBER_ACCESSORS(typeName, upperTypeName, nsNumberName)\
+GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)\
+GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 
 @implementation GSConfiguration
 
 - (void)setConfigObject:(id)value {
     NSLog(@"setter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
-
+    
     BOOL setWithCopy = [property.attributes[RTPropertyCopyAttribute] boolValue];
+    NSLog(@"encoding: %@", property.typeEncoding);
     if (property.isWeakReference) {
         value = [NSValue valueWithNonretainedObject:value];
     } else if (setWithCopy) {
@@ -54,20 +46,20 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     } else if (!value) {
         value = [NSNull null];
     }
-
+    
     [GSConfigurationManager setConfigValue:value forKey:property.name];
 }
 
 - (id)getConfigObject {
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     id value = [GSConfigurationManager configValueForKey:property.name];
-
+    
     if (property.isWeakReference) {
         value = [value nonretainedObjectValue];
     } else if ([value isKindOfClass:[NSNull class]]) {
         value = nil;
     }
-
+    
     NSLog(@"getter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
     return value;
 }
@@ -75,14 +67,14 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     BOOL isSetter = NO;
     RTProperty *property = [self dynamicPropertyForSelector:sel isSetter:&isSetter];
-
+    
     if (property) {
         NSLog(@"attempting to add method %@, sel = %@", property.name, NSStringFromSelector(sel));
         [self addMethodForSelector:sel property:property isSetter:isSetter];
-
+        
         return YES;
     }
-
+    
     return [super resolveInstanceMethod:sel];
 }
 
@@ -91,7 +83,7 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
     SEL subSel = nil;
     unichar type = [property.typeEncoding characterAtIndex:0];
     NSLog(@"add method for type: %c", type);
-
+    
     if (isSetter) {
         switch (type) {
             case '@': {
@@ -137,6 +129,9 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
             case 'd': {
                 subSel = @selector(setConfigDouble:);
                 break;
+            }
+            case 'B': {
+                subSel = @selector(setConfigBool:);
             }
             default: {
                 NSLog(@"unknown type %c", type);
@@ -190,6 +185,9 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
                 subSel = @selector(getConfigDouble);
                 break;
             }
+            case 'B': {
+                subSel = @selector(getConfigBool);
+            }
             default: {
                 NSLog(@"unknown type %c", type);
                 break;
@@ -197,7 +195,7 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
         }
         impEncoding = [[NSString stringWithFormat:@"%c@:", type] cStringUsingEncoding:NSASCIIStringEncoding];
     }
-
+    
     if (subSel) {
         class_addMethod([self class], sel, [self instanceMethodForSelector:subSel], impEncoding);
     }
@@ -232,7 +230,7 @@ GENERATE_NSNUMBER_SETTER(typeName, upperTypeName)
             }
         }
     }
-
+    
     return nil;
 }
 
@@ -243,9 +241,14 @@ GENERATE_NSNUMBER_ACCESSORS(long, Long)
 GENERATE_NSNUMBER_ACCESSORS(float, Float)
 GENERATE_NSNUMBER_ACCESSORS(double, Double)
 
-GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned char, UnsignedChar, unsignedChar)
-GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned short, UnsignedShort, unsignedShort)
-GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned int, UnsignedInt, unsignedInt)
-GENERATE_UNSIGNED_NSNUMBER_ACCESSORS(unsigned long, UnsignedLong, unsignedLong)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned char, UnsignedChar, unsignedChar)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned short, UnsignedShort, unsignedShort)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned int, UnsignedInt, unsignedInt)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned long, UnsignedLong, unsignedLong)
+
+#define STD_BOOL bool
+#undef bool
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(BOOL, Bool, bool)
+#define bool STD_BOOL
 
 @end

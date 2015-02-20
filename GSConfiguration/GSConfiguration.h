@@ -3,7 +3,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSConfiguration+Shared.h"
 
 /**
  * This base class allows configuration subclasses to act as a type-safe facade for config property values. Properties

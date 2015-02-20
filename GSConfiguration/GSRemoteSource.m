@@ -67,7 +67,7 @@
                                if (!error) {
                                    [wself parseResponse:data];
                                } else {
-                                   DDLogError(@"Error encountered while trying to sync GSRemoteSource endpoint %@, error: %@", wself.endpoint, error);
+                                   GSLogError(@"Error encountered while trying to sync GSRemoteSource endpoint %@, error: %@", wself.endpoint, error);
                                }
                            }];
 }
@@ -83,12 +83,12 @@
 
         if (!configurationData) {
             configurationData = @{};
-            DDLogWarn(@"JSON parser did not return a dictionary.");
+            GSLogWarn(@"JSON parser did not return a dictionary.");
         }
 
         self.readyBlock(configurationData);
     } else {
-        DDLogError(@"Unable to parse JSON response from %@: %@", self.endpoint, jsonError);
+        GSLogError(@"Unable to parse JSON response from %@: %@", self.endpoint, jsonError);
     }
 }
 

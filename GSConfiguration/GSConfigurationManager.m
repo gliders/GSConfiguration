@@ -14,7 +14,6 @@
 @property (nonatomic, strong) id<GSStore> store;
 @property (nonatomic) dispatch_queue_t sourceQueue;
 
-
 @end
 
 @implementation GSConfigurationManager
@@ -79,12 +78,20 @@
     self.transformersForType[NSStringFromClass(type)] = transformerName;
 };
 
++ (void)setConfigValue:(id)value forKey:(NSString *)key {
+    [[self sharedInstance] setConfigValue:value forKey:key];
+}
+
++ (id)configValueForKey:(NSString *)name {
+    return [[self sharedInstance] configValueForKey:name];
+}
+
 + (void)addSource:(GSSource *)source {
     [[self sharedInstance] addSource:source];
 }
 
 + (void)setStore:(id <GSStore>)store {
-    [self sharedInstance].store = store;
+    [GSConfigurationManager sharedInstance].store = store;
 }
 
 + (void)cleanUp {
@@ -95,7 +102,7 @@
     [[self sharedInstance] registerTransformerName:transformerName forClass:type];
 }
 
-+ (instancetype)sharedInstance {
++ (GSConfigurationManager *)sharedInstance {
     static dispatch_once_t predicate;
     static GSConfigurationManager *instance;
 

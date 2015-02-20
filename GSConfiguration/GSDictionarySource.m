@@ -12,10 +12,10 @@
 
 @implementation GSDictionarySource
 
-- (instancetype)initWithData:(NSDictionary *)data {
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        _data = [NSDictionary dictionaryWithDictionary:data];
+        _data = [NSDictionary dictionaryWithDictionary:dictionary];
     }
 
     return self;
@@ -25,8 +25,8 @@
     ready(self.data);
 }
 
-+ (instancetype)sourceWithData:(NSDictionary *)data {
-    return [[self alloc] initWithData:data];
++ (instancetype)sourceWithDictionary:(NSDictionary *)dictionary {
+    return [[self alloc] initWithDictionary:dictionary];
 }
 
 @end

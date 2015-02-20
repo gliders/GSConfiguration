@@ -10,11 +10,12 @@
 
 @interface GSConfigurationManager : NSObject
 
++ (void)setConfigValue:(id)value forKey:(NSString *)key;
++ (id)configValueForKey:(NSString *)name;
 + (void)setStore:(id <GSStore>)store;
 + (void)addSource:(GSSource *)source;
 + (void)cleanUp;
 
 + (instancetype)sharedInstance;
-
 
 @end
