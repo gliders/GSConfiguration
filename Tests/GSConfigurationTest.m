@@ -12,11 +12,25 @@
 #import "GSConfigurationManager.h"
 #import "GSUserDefaultsStore.h"
 
-@interface SomeObject : NSObject
+@interface SomeObject : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *test;
 @end
 
 @implementation SomeObject
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.test forKey:@"test"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+
+    if (self) {
+        self.test = [coder decodeObjectForKey:@"test"];
+    }
+
+    return self;
+}
+
 @end
 
 @interface TestConfig : GSConfiguration
@@ -51,15 +65,15 @@
 - (void)testConfigurationFacade {
     TestConfig *config = [TestConfig config];
     config.connect = YES;
-    BOOL connect = [[GSConfigurationManager configValueForKey:@"connect"] boolValue];
+    BOOL connect = [[GSConfigurationManager configValueForKey:@"connect" withClass:nil] boolValue];
     XCTAssertTrue(connect, @"bool didn't store");
 
-//    SomeObject *object = [SomeObject new];
-//    object.test = @"test";
-//    config.obj = object;
-//    NSLog(@"testing obj graph");
-//    XCTAssertNotNil(config.obj.test, @"string wasnt stored");
-//    XCTAssertEqual(config.obj.test, ((SomeObject *)[GSConfigurationManager configValueForKey:@"obj"]).test, @"obj graph didn't store");
+    SomeObject *object = [SomeObject new];
+    object.test = @"test";
+    config.obj = object;
+    NSLog(@"testing obj graph");
+    XCTAssertNotNil(config.obj.test, @"string wasnt stored");
+    XCTAssertTrue([config.obj.test isEqualToString:((SomeObject *)[GSConfigurationManager configValueForKey:@"obj" withClass:nil]).test], @"obj graph didn't store");
 }
 
 @end

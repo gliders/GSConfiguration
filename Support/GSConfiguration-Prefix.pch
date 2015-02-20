@@ -9,6 +9,10 @@
 #ifndef GSConfiguration_GSConfiguration_Prefix_pch
 #define GSConfiguration_GSConfiguration_Prefix_pch
 
+#ifdef DEBUG
+#define GS_CONFIG_LOGGING_ENABLED 1
+#endif
+
 #import "GSConfigurationLogging.h"
 
 #endif

@@ -72,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		123EF94BE99694A43CA0A7EC /* GSConfigurationLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationLogging.h; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* GSConfiguration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSConfiguration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -101,7 +102,6 @@
 		E83F7A201A93F42E00200843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GSConfigurationTests/Info.plist; sourceTree = "<group>"; };
 		E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MAObjCRuntime.xcodeproj; path = ThirdParty/MAObjCRuntime/xcode/MAObjCRuntime.xcodeproj; sourceTree = "<group>"; };
 		E83F7A4E1A93FB1C00200843 /* GSConfiguration-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSConfiguration-Prefix.pch"; sourceTree = "<group>"; };
-		E83F7A4F1A93FB3E00200843 /* GSConfigurationLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationLogging.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +186,7 @@
 				E83F7A071A93F3F300200843 /* GSUserDefaultsStore.h */,
 				E83F7A081A93F3F300200843 /* GSUserDefaultsStore.m */,
 				E83F7A091A93F3F300200843 /* Transformers */,
+				123EF94BE99694A43CA0A7EC /* GSConfigurationLogging.h */,
 			);
 			path = GSConfiguration;
 			sourceTree = "<group>";
@@ -221,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				E83F7A4E1A93FB1C00200843 /* GSConfiguration-Prefix.pch */,
-				E83F7A4F1A93FB3E00200843 /* GSConfigurationLogging.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";

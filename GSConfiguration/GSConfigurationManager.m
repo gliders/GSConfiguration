@@ -10,7 +10,7 @@
 
 @property (nonatomic, strong) NSMutableOrderedSet *sources;
 @property (nonatomic, strong) NSMutableDictionary *dataForSources;
-@property (nonatomic, strong) NSMutableDictionary *transformersForType;
+@property (nonatomic, strong) NSMutableDictionary *transformerFor;
 @property (nonatomic, strong) id<GSStore> store;
 @property (nonatomic) dispatch_queue_t sourceQueue;
 
@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         _sources = [NSMutableOrderedSet orderedSet];
-        _sourceQueue = dispatch_queue_create("rs.glide.sourceQueue", DISPATCH_QUEUE_CONCURRENT);
+        _sourceQueue = dispatch_queue_create("rs.glide.sourceQueue", DISPATCH_QUEUE_SERIAL);
         _dataForSources = [NSMutableDictionary dictionary];
     }
 
@@ -66,24 +66,40 @@
     [self.store flush];
 }
 
-- (void)setConfigValue:(id)value forKey:(NSString *)key {
+- (void)setConfigValue:(id)value forKey:(NSString *)key withClass:(NSString *)clazz {
+    if (clazz) {
+        NSValueTransformer *transformer = [NSValueTransformer valueTransformerForName:self.transformerFor[clazz]];
+        if (transformer) {
+            value = [transformer reverseTransformedValue:transformer];
+        }
+    }
+
     [self.store setConfigObject:value forKey:key];
 }
 
-- (id)configValueForKey:(NSString *)key {
-    return [self.store configObjectForKey:key];
+- (id)configValueForKey:(NSString *)key withClass:(NSString *)clazz {
+    id value = [self.store configObjectForKey:key];
+
+    if (clazz) {
+        NSValueTransformer *transformer = [NSValueTransformer valueTransformerForName:self.transformerFor[clazz]];
+        if (transformer) {
+            value = [transformer transformedValue:transformer];
+        }
+    }
+
+    return value;
 }
 
-- (void)registerTransformerName:(NSString *)transformerName forClass:(Class)type {
-    self.transformersForType[NSStringFromClass(type)] = transformerName;
+- (void)registerTransformerName:(NSString *)transformerName forClass:(Class)clazz {
+    self.transformerFor[NSStringFromClass(clazz)] = transformerName;
 };
 
-+ (void)setConfigValue:(id)value forKey:(NSString *)key {
-    [[self sharedInstance] setConfigValue:value forKey:key];
++ (void)setConfigValue:(id)value forKey:(NSString *)key withClass:(NSString *)clazz {
+    [[self sharedInstance] setConfigValue:value forKey:key withClass:clazz];
 }
 
-+ (id)configValueForKey:(NSString *)name {
-    return [[self sharedInstance] configValueForKey:name];
++ (id)configValueForKey:(NSString *)name withClass:(NSString *)clazz {
+    return [[self sharedInstance] configValueForKey:name withClass:clazz];
 }
 
 + (void)addSource:(GSSource *)source {

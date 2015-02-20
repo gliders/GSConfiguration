@@ -31,16 +31,14 @@
     }
 }
 
-- (BOOL)containsKey:(NSString *)key {
-    return NO;
-}
-
 - (void)setConfigObject:(id)value forKey:(NSString *)key {
-    [self.userDefaults setObject:value forKey:key];
+    NSData *archivedValue = [NSKeyedArchiver archivedDataWithRootObject:value];
+    [self.userDefaults setObject:archivedValue forKey:key];
 }
 
 - (id)configObjectForKey:(NSString *)key {
-    return [self.userDefaults objectForKey:key];
+    id archivedValue = [self.userDefaults objectForKey:key];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedValue];
 }
 
 - (void)flush {

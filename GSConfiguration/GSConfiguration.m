@@ -11,13 +11,13 @@
 - (void)setConfig##upperTypeName:(typeName)value { \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     NSNumber *number = [NSNumber numberWith##upperTypeName:value]; \
-    [GSConfigurationManager setConfigValue:number forKey:property.name]; \
+    [GSConfigurationManager setConfigValue:number forKey:property.name withClass:nil]; \
 }
 
 #define GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName) \
 - (typeName)getConfig##upperTypeName { \
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
-    typeName value = [[GSConfigurationManager configValueForKey:property.name] nsNumberName##Value]; \
+    typeName value = [[GSConfigurationManager configValueForKey:property.name withClass:nil] nsNumberName##Value]; \
     return value; \
 }
 
@@ -34,11 +34,10 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 @implementation GSConfiguration
 
 - (void)setConfigObject:(id)value {
-    NSLog(@"setter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     
     BOOL setWithCopy = [property.attributes[RTPropertyCopyAttribute] boolValue];
-    NSLog(@"encoding: %@", property.typeEncoding);
+
     if (property.isWeakReference) {
         value = [NSValue valueWithNonretainedObject:value];
     } else if (setWithCopy) {
@@ -46,13 +45,15 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
     } else if (!value) {
         value = [NSNull null];
     }
-    
-    [GSConfigurationManager setConfigValue:value forKey:property.name];
+
+    NSString *clazz = [GSConfiguration extractClassFromEncoding:property.typeEncoding];
+    [GSConfigurationManager setConfigValue:value forKey:property.name withClass:clazz];
 }
 
 - (id)getConfigObject {
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
-    id value = [GSConfigurationManager configValueForKey:property.name];
+    NSString *clazz = [GSConfiguration extractClassFromEncoding:property.typeEncoding];
+    id value = [GSConfigurationManager configValueForKey:property.name withClass:clazz];
     
     if (property.isWeakReference) {
         value = [value nonretainedObjectValue];
@@ -60,8 +61,15 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
         value = nil;
     }
     
-    NSLog(@"getter SEL = %@ value %@", NSStringFromSelector(_cmd), value);
     return value;
+}
+
++ (NSString *)extractClassFromEncoding:(NSString *)encoding {
+    if ([encoding characterAtIndex:0] == '@') {
+        return [encoding substringWithRange:NSMakeRange(2, encoding.length - 3)];
+    } else {
+        return nil;
+    }
 }
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
@@ -69,7 +77,6 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
     RTProperty *property = [self dynamicPropertyForSelector:sel isSetter:&isSetter];
     
     if (property) {
-        NSLog(@"attempting to add method %@, sel = %@", property.name, NSStringFromSelector(sel));
         [self addMethodForSelector:sel property:property isSetter:isSetter];
         
         return YES;
@@ -82,8 +89,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
     const char *impEncoding;
     SEL subSel = nil;
     unichar type = [property.typeEncoding characterAtIndex:0];
-    NSLog(@"add method for type: %c", type);
-    
+
     if (isSetter) {
         switch (type) {
             case '@': {
@@ -134,7 +140,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
                 subSel = @selector(setConfigBool:);
             }
             default: {
-                NSLog(@"unknown type %c", type);
+                GSLogWarn(@"unsupported configuration type %c", type);
                 break;
             }
         }
@@ -189,7 +195,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
                 subSel = @selector(getConfigBool);
             }
             default: {
-                NSLog(@"unknown type %c", type);
+                GSLogWarn(@"unsupported configuration type %c", type);
                 break;
             }
         }

@@ -8,7 +8,6 @@
 
 @required
 - (void)setStoreDefaults:(NSDictionary *)defaults;
-- (BOOL)containsKey:(NSString *)key;
 - (void)setConfigWithDictionary:(NSDictionary *)values;
 - (void)setConfigObject:(id)value forKey:(NSString *)key;
 - (id)configObjectForKey:(NSString *)key;
