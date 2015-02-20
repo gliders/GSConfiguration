@@ -14,7 +14,6 @@
 		E83F7A301A93F51D00200843 /* GSDictionarySource.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F79FD1A93F3F300200843 /* GSDictionarySource.m */; };
 		E83F7A341A93F51D00200843 /* GSRemoteSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A011A93F3F300200843 /* GSRemoteSource.m */; };
 		E83F7A361A93F51D00200843 /* GSSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A031A93F3F300200843 /* GSSource.m */; };
-		E83F7A391A93F51D00200843 /* GSURLValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A061A93F3F300200843 /* GSURLValueTransformer.m */; };
 		E83F7A3B1A93F51D00200843 /* GSUserDefaultsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A081A93F3F300200843 /* GSUserDefaultsStore.m */; };
 		E83F7A3D1A93F51D00200843 /* GSURLValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A0B1A93F3F300200843 /* GSURLValueTransformer.m */; };
 		E83F7A531A94012100200843 /* GSConfigurationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* GSConfigurationTest.m */; };
@@ -91,8 +90,6 @@
 		E83F7A021A93F3F300200843 /* GSSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSSource.h; sourceTree = "<group>"; };
 		E83F7A031A93F3F300200843 /* GSSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSSource.m; sourceTree = "<group>"; };
 		E83F7A041A93F3F300200843 /* GSStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSStore.h; sourceTree = "<group>"; };
-		E83F7A051A93F3F300200843 /* GSURLValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSURLValueTransformer.h; sourceTree = "<group>"; };
-		E83F7A061A93F3F300200843 /* GSURLValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSURLValueTransformer.m; sourceTree = "<group>"; };
 		E83F7A071A93F3F300200843 /* GSUserDefaultsStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSUserDefaultsStore.h; sourceTree = "<group>"; };
 		E83F7A081A93F3F300200843 /* GSUserDefaultsStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSUserDefaultsStore.m; sourceTree = "<group>"; };
 		E83F7A0A1A93F3F300200843 /* GSURLValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSURLValueTransformer.h; sourceTree = "<group>"; };
@@ -181,8 +178,6 @@
 				E83F7A021A93F3F300200843 /* GSSource.h */,
 				E83F7A031A93F3F300200843 /* GSSource.m */,
 				E83F7A041A93F3F300200843 /* GSStore.h */,
-				E83F7A051A93F3F300200843 /* GSURLValueTransformer.h */,
-				E83F7A061A93F3F300200843 /* GSURLValueTransformer.m */,
 				E83F7A071A93F3F300200843 /* GSUserDefaultsStore.h */,
 				E83F7A081A93F3F300200843 /* GSUserDefaultsStore.m */,
 				E83F7A091A93F3F300200843 /* Transformers */,
@@ -353,7 +348,6 @@
 				E83F7A301A93F51D00200843 /* GSDictionarySource.m in Sources */,
 				E83F7A341A93F51D00200843 /* GSRemoteSource.m in Sources */,
 				E83F7A361A93F51D00200843 /* GSSource.m in Sources */,
-				E83F7A391A93F51D00200843 /* GSURLValueTransformer.m in Sources */,
 				E83F7A3B1A93F51D00200843 /* GSUserDefaultsStore.m in Sources */,
 				E83F7A3D1A93F51D00200843 /* GSURLValueTransformer.m in Sources */,
 			);
