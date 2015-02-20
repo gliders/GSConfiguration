@@ -10,5 +10,6 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 + (instancetype)sourceWithDictionary:(NSDictionary *)dictionary;
++ (instancetype)sourceWithPListNamed:(NSString *)name;
 
 @end

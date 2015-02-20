@@ -16,6 +16,6 @@
 + (void)addSource:(GSSource *)source;
 + (void)cleanUp;
 
-+ (instancetype)sharedInstance;
++ (instancetype)defaultManager;
 
 @end

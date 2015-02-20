@@ -5,6 +5,7 @@
 #import "GSConfigurationManager.h"
 #import "GSUserDefaultsStore.h"
 #import "GSSource.h"
+#import "GSURLStringTransformer.h"
 
 @interface GSConfigurationManager ()
 
@@ -24,6 +25,12 @@
         _sources = [NSMutableOrderedSet orderedSet];
         _sourceQueue = dispatch_queue_create("rs.glide.sourceQueue", DISPATCH_QUEUE_SERIAL);
         _dataForSources = [NSMutableDictionary dictionary];
+        _transformerFor = [NSMutableDictionary dictionary];
+
+        [NSValueTransformer setValueTransformer:[[GSURLStringTransformer alloc] init]
+                                        forName:GSURLStringTransformerName];
+
+        [self registerTransformerName:GSURLStringTransformerName forClass:[NSURL class]];
     }
 
     return self;
@@ -83,7 +90,7 @@
     if (clazz) {
         NSValueTransformer *transformer = [NSValueTransformer valueTransformerForName:self.transformerFor[clazz]];
         if (transformer) {
-            value = [transformer transformedValue:transformer];
+            value = [transformer transformedValue:value];
         }
     }
 
@@ -95,30 +102,30 @@
 };
 
 + (void)setConfigValue:(id)value forKey:(NSString *)key withClass:(NSString *)clazz {
-    [[self sharedInstance] setConfigValue:value forKey:key withClass:clazz];
+    [[self defaultManager] setConfigValue:value forKey:key withClass:clazz];
 }
 
 + (id)configValueForKey:(NSString *)name withClass:(NSString *)clazz {
-    return [[self sharedInstance] configValueForKey:name withClass:clazz];
+    return [[self defaultManager] configValueForKey:name withClass:clazz];
 }
 
 + (void)addSource:(GSSource *)source {
-    [[self sharedInstance] addSource:source];
+    [[self defaultManager] addSource:source];
 }
 
 + (void)setStore:(id <GSStore>)store {
-    [GSConfigurationManager sharedInstance].store = store;
+    [GSConfigurationManager defaultManager].store = store;
 }
 
 + (void)cleanUp {
-    [[self sharedInstance] cleanUp];
+    [[self defaultManager] cleanUp];
 }
 
 + (void)registerTransformerName:(NSString *)transformerName forClass:(Class)type {
-    [[self sharedInstance] registerTransformerName:transformerName forClass:type];
+    [[self defaultManager] registerTransformerName:transformerName forClass:type];
 }
 
-+ (GSConfigurationManager *)sharedInstance {
++ (GSConfigurationManager *)defaultManager {
     static dispatch_once_t predicate;
     static GSConfigurationManager *instance;
 

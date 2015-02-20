@@ -7,4 +7,5 @@
 
 @interface GSUserDefaultsStore : NSObject <GSStore>
 
++ (instancetype)store;
 @end

@@ -8,42 +8,25 @@
 
 #import <XCTest/XCTest.h>
 #import "GSConfiguration.h"
-#import "GSConfiguration+Shared.h"
 #import "GSConfigurationManager.h"
 #import "GSUserDefaultsStore.h"
-
-@interface SomeObject : NSObject <NSCoding>
-@property (nonatomic, strong) NSString *test;
-@end
-
-@implementation SomeObject
-- (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:self.test forKey:@"test"];
-}
-
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super init];
-
-    if (self) {
-        self.test = [coder decodeObjectForKey:@"test"];
-    }
-
-    return self;
-}
-
-@end
+#import "GSDictionarySource.h"
 
 @interface TestConfig : GSConfiguration
 
-@property (getter=isConnected, setter=setConnected:) BOOL connect;
-@property (nonatomic) SomeObject *obj;
+@property (nonatomic) BOOL newFeatureActivated;
+@property (nonatomic) NSUInteger timeout;
+@property (nonatomic) NSURL *baseUrl;
+@property (nonatomic) NSString *apiKey;
 
 @end
 
 @implementation TestConfig
 
-@dynamic connect;
-@dynamic obj;
+@dynamic newFeatureActivated;
+@dynamic timeout;
+@dynamic baseUrl;
+@dynamic apiKey;
 
 @end
 
@@ -52,28 +35,23 @@
 
 @implementation GSConfigurationTest
 
-- (void)setUp {
-    [super setUp];
-    id<GSStore> store = [[GSUserDefaultsStore alloc] init];
-    [GSConfigurationManager setStore:store];
++ (void)setUp {
+    [GSConfigurationManager setStore:[GSUserDefaultsStore store]];
 }
 
-- (void)tearDown {
-    [super tearDown];
-}
+- (void)testPListAsConfigSource {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *plistPath = [bundle pathForResource:@"SampleConfig" ofType:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    [GSConfigurationManager setStore:[GSUserDefaultsStore store]];
+    [GSConfigurationManager addSource:[GSDictionarySource sourceWithDictionary:plistData]];
 
-- (void)testConfigurationFacade {
     TestConfig *config = [TestConfig config];
-    config.connect = YES;
-    BOOL connect = [[GSConfigurationManager configValueForKey:@"connect" withClass:nil] boolValue];
-    XCTAssertTrue(connect, @"bool didn't store");
-
-    SomeObject *object = [SomeObject new];
-    object.test = @"test";
-    config.obj = object;
-    NSLog(@"testing obj graph");
-    XCTAssertNotNil(config.obj.test, @"string wasnt stored");
-    XCTAssertTrue([config.obj.test isEqualToString:((SomeObject *)[GSConfigurationManager configValueForKey:@"obj" withClass:nil]).test], @"obj graph didn't store");
+    XCTAssertTrue(config.newFeatureActivated);
+    XCTAssertEqual(config.timeout, 4000);
+    XCTAssertTrue([config.baseUrl isKindOfClass:[NSURL class]]);
+    XCTAssertTrue([config.baseUrl.absoluteString isEqualToString:@"http://glide.rs"]);
+    XCTAssertTrue([config.apiKey isEqualToString:@"1234abcde"]);
 }
 
 @end

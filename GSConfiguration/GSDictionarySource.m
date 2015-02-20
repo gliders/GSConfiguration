@@ -21,12 +21,21 @@
     return self;
 }
 
-- (void)prepareWithCompletion:(GSConfigurationReady)ready {
-    ready(self.data);
+- (void)fetchConfiguration:(GSConfigurationReady)completion {
+    completion(self.data);
 }
 
 + (instancetype)sourceWithDictionary:(NSDictionary *)dictionary {
     return [[self alloc] initWithDictionary:dictionary];
+}
+
++ (instancetype)sourceWithPListNamed:(NSString *)name {
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:name ofType:@"plist"];
+    if (!plistPath) {
+        GSLogWarn(@"PList named %@ not found", name);
+    }
+    NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    return [self sourceWithDictionary:plistDictionary];
 }
 
 @end

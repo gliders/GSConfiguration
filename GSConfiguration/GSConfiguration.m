@@ -33,6 +33,10 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 
 @implementation GSConfiguration
 
++ (instancetype)config {
+    return [[self alloc] init];
+}
+
 - (void)setConfigObject:(id)value {
     RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     

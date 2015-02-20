@@ -12,6 +12,8 @@
 
 @interface GSConfiguration : NSObject
 
++ (instancetype)config;
+
 #pragma mark Example Properties
 
 // @property (readonly) NSURL *canonicalServiceURL;

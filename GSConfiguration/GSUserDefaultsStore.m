@@ -32,13 +32,21 @@
 }
 
 - (void)setConfigObject:(id)value forKey:(NSString *)key {
-    NSData *archivedValue = [NSKeyedArchiver archivedDataWithRootObject:value];
-    [self.userDefaults setObject:archivedValue forKey:key];
+    if ([value conformsToProtocol:@protocol(NSCoding)]) {
+        value = [NSKeyedArchiver archivedDataWithRootObject:value];
+    }
+
+    [self.userDefaults setObject:value forKey:key];
 }
 
 - (id)configObjectForKey:(NSString *)key {
     id archivedValue = [self.userDefaults objectForKey:key];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedValue];
+
+    if ([archivedValue isKindOfClass:[NSData class]]) {
+        archivedValue = [NSKeyedUnarchiver unarchiveObjectWithData:archivedValue];
+    }
+
+    return archivedValue;
 }
 
 - (void)flush {
@@ -46,7 +54,13 @@
 }
 
 - (void)setConfigWithDictionary:(NSDictionary *)values {
-    [self.userDefaults setValuesForKeysWithDictionary:values];
+    for (NSString *key in values.allKeys) {
+        [self setConfigObject:values[key] forKey:key];
+    }
+}
+
++ (instancetype)store {
+    return [[self alloc] init];
 }
 
 @end
