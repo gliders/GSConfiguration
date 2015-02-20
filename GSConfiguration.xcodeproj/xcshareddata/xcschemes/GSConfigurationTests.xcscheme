@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E83F7A0F1A93F42E00200843"
-               BuildableName = "libGSConfiguration-iOS.a"
-               BlueprintName = "GSConfiguration-iOS"
+               BlueprintIdentifier = "E83F7A191A93F42E00200843"
+               BuildableName = "GSConfiguration-iOSTests.xctest"
+               BlueprintName = "GSConfiguration-iOSTests"
                ReferencedContainer = "container:GSConfiguration.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E83F7A0F1A93F42E00200843"
-            BuildableName = "libGSConfiguration-iOS.a"
-            BlueprintName = "GSConfiguration-iOS"
+            BlueprintIdentifier = "E83F7A191A93F42E00200843"
+            BuildableName = "GSConfiguration-iOSTests.xctest"
+            BlueprintName = "GSConfiguration-iOSTests"
             ReferencedContainer = "container:GSConfiguration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,9 +61,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E83F7A0F1A93F42E00200843"
-            BuildableName = "libGSConfiguration-iOS.a"
-            BlueprintName = "GSConfiguration-iOS"
+            BlueprintIdentifier = "E83F7A191A93F42E00200843"
+            BuildableName = "GSConfiguration-iOSTests.xctest"
+            BlueprintName = "GSConfiguration-iOSTests"
             ReferencedContainer = "container:GSConfiguration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,9 +79,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E83F7A0F1A93F42E00200843"
-            BuildableName = "libGSConfiguration-iOS.a"
-            BlueprintName = "GSConfiguration-iOS"
+            BlueprintIdentifier = "E83F7A191A93F42E00200843"
+            BuildableName = "GSConfiguration-iOSTests.xctest"
+            BlueprintName = "GSConfiguration-iOSTests"
             ReferencedContainer = "container:GSConfiguration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

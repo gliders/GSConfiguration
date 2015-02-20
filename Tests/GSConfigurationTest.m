@@ -54,12 +54,12 @@
     BOOL connect = [[GSConfigurationManager configValueForKey:@"connect"] boolValue];
     XCTAssertTrue(connect, @"bool didn't store");
 
-    SomeObject *object = [SomeObject new];
-    object.test = @"test";
-    config.obj = object;
-    NSLog(@"testing obj graph");
-    XCTAssertNotNil(config.obj.test, @"string wasnt stored");
-    XCTAssertEqual(config.obj.test, ((SomeObject *)[GSConfigurationManager configValueForKey:@"obj"]).test, @"obj graph didn't store");
+//    SomeObject *object = [SomeObject new];
+//    object.test = @"test";
+//    config.obj = object;
+//    NSLog(@"testing obj graph");
+//    XCTAssertNotNil(config.obj.test, @"string wasnt stored");
+//    XCTAssertEqual(config.obj.test, ((SomeObject *)[GSConfigurationManager configValueForKey:@"obj"]).test, @"obj graph didn't store");
 }
 
 @end
