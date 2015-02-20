@@ -2,16 +2,16 @@
 // Created by Ryan Brignoni on 7/17/14.
 //
 
-#import "GSPlistLoader.h"
+#import "GSDictionarySource.h"
 
-@interface GSPlistLoader ()
+@interface GSDictionarySource ()
 
 @property (nonatomic, copy, readwrite) NSString *plistName;
 @property (nonatomic, readwrite) BOOL syncWithUserDefaults;
 
 @end
 
-@implementation GSPlistLoader
+@implementation GSDictionarySource
 
 - (instancetype)initWithPlistName:(NSString *)plistName {
     return [self initWithPlistName:plistName syncWithUserDefaults:YES];

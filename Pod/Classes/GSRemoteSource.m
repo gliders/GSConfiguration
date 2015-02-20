@@ -2,15 +2,15 @@
 // Created by Ryan Brignoni on 7/17/14.
 //
 
-#import "GSRemoteLoader.h"
+#import "GSRemoteSource.h"
 
-@interface GSRemoteLoader ()
+@interface GSRemoteSource ()
 
 @property (nonatomic, strong, readwrite) NSURL *endpoint;
 
 @end
 
-@implementation GSRemoteLoader
+@implementation GSRemoteSource
 
 - (instancetype)initWithEndpoint:(NSURL *)endpoint {
     self = [super init];

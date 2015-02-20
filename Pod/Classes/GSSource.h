@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GSBaseLoader : NSObject
+@interface GSSource : NSObject
 
 @property (nonatomic, getter=isLoaded, readonly) BOOL loaded;
 

@@ -3,15 +3,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSBaseLoader.h"
+#import "GSSource.h"
 
-@interface GSPlistLoader : GSBaseLoader
+@interface GSDictionarySource : GSSource
 
 @property (nonatomic, copy, readonly) NSString *plistName;
-@property (nonatomic, readonly) BOOL syncWithUserDefaults; // Defaults to YES.
 
 - (instancetype)initWithPlistName:(NSString *)plistName;
-- (instancetype)initWithPlistName:(NSString *)plistName syncWithUserDefaults:(BOOL)sync;
 + (instancetype)configWithPlistName:(NSString *)plistName;
 
 @end

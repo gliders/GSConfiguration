@@ -4,10 +4,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GSConfigurationStore <NSObject>
+@protocol GSStore <NSObject>
 
 @required
-- (void)initializeStore;
+- (void)initializeStoreWithDefaults:(NSDictionary *)defaults;
 - (BOOL)containsKey:(NSString *)key;
 - (void)setConfigObject:(id)value forKey:(NSString *)key;
 - (id)configObjectForKey:(NSString *)key;
