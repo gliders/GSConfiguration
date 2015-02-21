@@ -76,7 +76,7 @@
 
 - (NSUInteger)hash
 {
-    return [[self objCProtocol] hash];
+    return [(id)[self objCProtocol] hash];
 }
 
 - (Protocol *)objCProtocol
