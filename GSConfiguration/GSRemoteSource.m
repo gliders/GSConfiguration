@@ -3,6 +3,7 @@
 //
 
 #import "GSRemoteSource.h"
+#import "GSConfigurationLogging.h"
 
 @interface GSRemoteSource ()
 

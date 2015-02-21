@@ -3,6 +3,7 @@
 //
 
 #import "GSDictionarySource.h"
+#import "GSConfigurationLogging.h"
 
 @interface GSDictionarySource ()
 

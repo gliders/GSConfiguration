@@ -6,6 +6,7 @@
 #import "ThirdParty/MAObjCRuntime/RTProperty.h"
 #import "ThirdParty/MAObjcRuntime/MARTNSObject.h"
 #import "GSConfigurationManager.h"
+#import "GSConfigurationLogging.h"
 
 #define GENERATE_NSNUMBER_SETTER(typeName, upperTypeName) \
 - (void)setConfig##upperTypeName:(typeName)value { \

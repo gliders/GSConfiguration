@@ -99,7 +99,6 @@
 		E83F7A1A1A93F42E00200843 /* GSConfiguration-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GSConfiguration-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83F7A201A93F42E00200843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Support/Info.plist; sourceTree = "<group>"; };
 		E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MAObjCRuntime.xcodeproj; path = ThirdParty/MAObjCRuntime/xcode/MAObjCRuntime.xcodeproj; sourceTree = "<group>"; };
-		E83F7A4E1A93FB1C00200843 /* GSConfiguration-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSConfiguration-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +216,6 @@
 		E83F7A4D1A93FAD700200843 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				E83F7A4E1A93FB1C00200843 /* GSConfiguration-Prefix.pch */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -457,7 +455,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Support/GSConfiguration-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -479,7 +476,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Support/GSConfiguration-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
