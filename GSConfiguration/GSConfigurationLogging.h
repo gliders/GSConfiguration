@@ -13,6 +13,7 @@
 #if GS_CONFIG_LOGGING_ENABLED
 
     #if __has_include("CocoaLumberjack.h")
+        #import <CocoaLumberjack/CocoaLumberjack.h>
         #define GSLogDebug(fmt, ...) DDLogDebug(fmt, ##__VA_ARGS__)
         #define GSLogInfo(fmt, ...)  DDLogInfo(fmt, ##__VA_ARGS__)
         #define GSLogWarn(fmt, ...)  DDLogWarn(fmt, ##__VA_ARGS__)
