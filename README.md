@@ -139,6 +139,16 @@ dictionary. This means if you define two properties in two GSConfiguration subcl
 map to the same value internally. 
 
  * The order in which you add sources matters. The last source added wins when they contain different values for the same key.
+ 
+## Logging
+
+Turn on logging by defining a macro:
+
+```objective-c
+#define GS_CONFIG_LOGGING_ENABLED 1
+```
+
+If CocoaLumberjack is present, GSConfiguration will automatically use that instead. 
 
 ## Future Plans
 
