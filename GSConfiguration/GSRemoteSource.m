@@ -23,7 +23,7 @@
         _endpoint = endpoint;
         _timeoutInterval = 60;
         _parserBlock = parserBlock;
-        _cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+        _cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         _queue = [[NSOperationQueue alloc] init];
         _queue.name = [_endpoint absoluteString];
     }
