@@ -97,7 +97,7 @@
 		E83F7A0B1A93F3F300200843 /* GSURLStringTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSURLStringTransformer.m; sourceTree = "<group>"; };
 		E83F7A101A93F42E00200843 /* libGSConfiguration-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGSConfiguration-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83F7A1A1A93F42E00200843 /* GSConfiguration-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GSConfiguration-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E83F7A201A93F42E00200843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GSConfigurationTests/Info.plist; sourceTree = "<group>"; };
+		E83F7A201A93F42E00200843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Support/Info.plist; sourceTree = "<group>"; };
 		E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MAObjCRuntime.xcodeproj; path = ThirdParty/MAObjCRuntime/xcode/MAObjCRuntime.xcodeproj; sourceTree = "<group>"; };
 		E83F7A4E1A93FB1C00200843 /* GSConfiguration-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSConfiguration-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -504,7 +504,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = GSConfigurationTests/Info.plist;
+				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -527,7 +527,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = GSConfigurationTests/Info.plist;
+				INFOPLIST_FILE = Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
