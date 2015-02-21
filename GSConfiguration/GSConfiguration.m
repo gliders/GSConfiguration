@@ -41,7 +41,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 - (void)setConfigObject:(id)value {
     GSRTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     
-    BOOL setWithCopy = [property.attributes[RTPropertyCopyAttribute] boolValue];
+    BOOL setWithCopy = [property.attributes[GSRTPropertyCopyAttribute] boolValue];
 
     if (property.isWeakReference) {
         value = [NSValue valueWithNonretainedObject:value];
