@@ -5,6 +5,12 @@
 [![License](https://img.shields.io/cocoapods/l/GSConfiguration.svg?style=flat)](http://cocoadocs.org/docsets/GSConfiguration)
 [![Platform](https://img.shields.io/cocoapods/p/GSConfiguration.svg?style=flat)](http://cocoadocs.org/docsets/GSConfiguration)
 
+## What Is It?
+
+GSConfiguration is a type-safe, generalized configuration library for iOS applications. It supports multiple local
+plist config files as well as remote JSON configuration services. All configuration files are
+represented by classes with @dynamic properties similar to Core Data's NSManagedObject.
+
 ## Installation
 
 GSConfiguration is available through [CocoaPods](http://cocoapods.org). To install
