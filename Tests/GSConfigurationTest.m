@@ -14,10 +14,11 @@
 
 @interface TestConfig : GSConfiguration
 
-@property (nonatomic) BOOL newFeatureActivated;
-@property (nonatomic) NSUInteger timeout;
-@property (nonatomic) NSURL *baseUrl;
-@property (nonatomic) NSString *apiKey;
+@property BOOL newFeatureActivated;
+@property NSTimeInterval timeout;
+@property NSURL *baseUrl;
+@property NSString *apiKey;
+@property NSString *missing;
 
 @end
 
@@ -27,6 +28,7 @@
 @dynamic timeout;
 @dynamic baseUrl;
 @dynamic apiKey;
+@dynamic missing;
 
 @end
 
@@ -52,6 +54,7 @@
     XCTAssertTrue([config.baseUrl isKindOfClass:[NSURL class]]);
     XCTAssertTrue([config.baseUrl.absoluteString isEqualToString:@"http://glide.rs"]);
     XCTAssertTrue([config.apiKey isEqualToString:@"1234abcde"]);
+    XCTAssertNil(config.missing);
 }
 
 @end
