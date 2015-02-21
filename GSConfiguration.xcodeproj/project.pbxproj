@@ -16,7 +16,12 @@
 		E83F7A3B1A93F51D00200843 /* GSUserDefaultsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A081A93F3F300200843 /* GSUserDefaultsStore.m */; };
 		E83F7A3D1A93F51D00200843 /* GSURLStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E83F7A0B1A93F3F300200843 /* GSURLStringTransformer.m */; };
 		E83F7A531A94012100200843 /* GSConfigurationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* GSConfigurationTest.m */; };
-		E8C6B73B1A94298D006BF5EF /* libMAObjCRuntime_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E83F7A481A93F84100200843 /* libMAObjCRuntime_iOS.a */; };
+		E8D8CF4C1A9886EC00944D37 /* GSMARTNSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF401A9886EC00944D37 /* GSMARTNSObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E8D8CF4D1A9886EC00944D37 /* GSRTIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF421A9886EC00944D37 /* GSRTIvar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E8D8CF4E1A9886EC00944D37 /* GSRTMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF441A9886EC00944D37 /* GSRTMethod.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E8D8CF4F1A9886EC00944D37 /* GSRTProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF461A9886EC00944D37 /* GSRTProperty.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E8D8CF501A9886EC00944D37 /* GSRTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF481A9886EC00944D37 /* GSRTProtocol.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E8D8CF511A9886EC00944D37 /* GSRTUnregisteredClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D8CF4A1A9886EC00944D37 /* GSRTUnregisteredClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E8FE6E8C1A97DCB100A5675F /* GSURLStringTransformerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 123EF801F3EC3E75D2503DB1 /* GSURLStringTransformerTest.m */; };
 		E8FE6E911A97E1FB00A5675F /* SampleConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123EF1F3A624E2B250520E23 /* SampleConfig.plist */; };
 /* End PBXBuildFile section */
@@ -28,34 +33,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = E83F7A0F1A93F42E00200843;
 			remoteInfo = GSConfiguration;
-		};
-		E83F7A451A93F84100200843 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DD76FA10486AA7600D96B5E;
-			remoteInfo = MAObjCRuntime;
-		};
-		E83F7A471A93F84100200843 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 22A07AE215241A3B008A2A36;
-			remoteInfo = MAObjCRuntime_iOS;
-		};
-		E83F7A491A93F84100200843 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 22A07AF115241A3B008A2A36;
-			remoteInfo = MAObjCRuntime_iOSTests;
-		};
-		E83F7A4B1A93F85100200843 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 22A07AE115241A3B008A2A36;
-			remoteInfo = MAObjCRuntime_iOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -98,7 +75,19 @@
 		E83F7A101A93F42E00200843 /* libGSConfiguration-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGSConfiguration-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83F7A1A1A93F42E00200843 /* GSConfiguration-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GSConfiguration-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83F7A201A93F42E00200843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Support/Info.plist; sourceTree = "<group>"; };
-		E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MAObjCRuntime.xcodeproj; path = ThirdParty/MAObjCRuntime/xcode/MAObjCRuntime.xcodeproj; sourceTree = "<group>"; };
+		E8D8CF3F1A9886EC00944D37 /* GSMARTNSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSMARTNSObject.h; sourceTree = "<group>"; };
+		E8D8CF401A9886EC00944D37 /* GSMARTNSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSMARTNSObject.m; sourceTree = "<group>"; };
+		E8D8CF411A9886EC00944D37 /* GSRTIvar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRTIvar.h; sourceTree = "<group>"; };
+		E8D8CF421A9886EC00944D37 /* GSRTIvar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRTIvar.m; sourceTree = "<group>"; };
+		E8D8CF431A9886EC00944D37 /* GSRTMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRTMethod.h; sourceTree = "<group>"; };
+		E8D8CF441A9886EC00944D37 /* GSRTMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRTMethod.m; sourceTree = "<group>"; };
+		E8D8CF451A9886EC00944D37 /* GSRTProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRTProperty.h; sourceTree = "<group>"; };
+		E8D8CF461A9886EC00944D37 /* GSRTProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRTProperty.m; sourceTree = "<group>"; };
+		E8D8CF471A9886EC00944D37 /* GSRTProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRTProtocol.h; sourceTree = "<group>"; };
+		E8D8CF481A9886EC00944D37 /* GSRTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRTProtocol.m; sourceTree = "<group>"; };
+		E8D8CF491A9886EC00944D37 /* GSRTUnregisteredClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRTUnregisteredClass.h; sourceTree = "<group>"; };
+		E8D8CF4A1A9886EC00944D37 /* GSRTUnregisteredClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRTUnregisteredClass.m; sourceTree = "<group>"; };
+		E8D8CF4B1A9886EC00944D37 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8C6B73B1A94298D006BF5EF /* libMAObjCRuntime_iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,19 +186,9 @@
 		E83F7A3E1A93F82A00200843 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */,
+				E8D8CF3D1A9886EC00944D37 /* MAObjCRuntime */,
 			);
 			name = ThirdParty;
-			sourceTree = "<group>";
-		};
-		E83F7A401A93F84100200843 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E83F7A461A93F84100200843 /* MAObjCRuntime */,
-				E83F7A481A93F84100200843 /* libMAObjCRuntime_iOS.a */,
-				E83F7A4A1A93F84100200843 /* MAObjCRuntime_iOSTests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E83F7A4D1A93FAD700200843 /* Support */ = {
@@ -218,6 +196,27 @@
 			children = (
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		E8D8CF3D1A9886EC00944D37 /* MAObjCRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				E8D8CF3F1A9886EC00944D37 /* GSMARTNSObject.h */,
+				E8D8CF401A9886EC00944D37 /* GSMARTNSObject.m */,
+				E8D8CF411A9886EC00944D37 /* GSRTIvar.h */,
+				E8D8CF421A9886EC00944D37 /* GSRTIvar.m */,
+				E8D8CF431A9886EC00944D37 /* GSRTMethod.h */,
+				E8D8CF441A9886EC00944D37 /* GSRTMethod.m */,
+				E8D8CF451A9886EC00944D37 /* GSRTProperty.h */,
+				E8D8CF461A9886EC00944D37 /* GSRTProperty.m */,
+				E8D8CF471A9886EC00944D37 /* GSRTProtocol.h */,
+				E8D8CF481A9886EC00944D37 /* GSRTProtocol.m */,
+				E8D8CF491A9886EC00944D37 /* GSRTUnregisteredClass.h */,
+				E8D8CF4A1A9886EC00944D37 /* GSRTUnregisteredClass.m */,
+				E8D8CF4B1A9886EC00944D37 /* LICENSE */,
+			);
+			name = MAObjCRuntime;
+			path = ThirdParty/MAObjCRuntime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +233,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E83F7A4C1A93F85100200843 /* PBXTargetDependency */,
 			);
 			name = "GSConfiguration-iOS";
 			productName = GSConfiguration;
@@ -288,12 +286,6 @@
 			mainGroup = 6003F581195388D10070C39A;
 			productRefGroup = 6003F58B195388D20070C39A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E83F7A401A93F84100200843 /* Products */;
-					ProjectRef = E83F7A3F1A93F84100200843 /* MAObjCRuntime.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E83F7A0F1A93F42E00200843 /* GSConfiguration-iOS */,
@@ -301,30 +293,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		E83F7A461A93F84100200843 /* MAObjCRuntime */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = MAObjCRuntime;
-			remoteRef = E83F7A451A93F84100200843 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E83F7A481A93F84100200843 /* libMAObjCRuntime_iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMAObjCRuntime_iOS.a;
-			remoteRef = E83F7A471A93F84100200843 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E83F7A4A1A93F84100200843 /* MAObjCRuntime_iOSTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MAObjCRuntime_iOSTests.octest;
-			remoteRef = E83F7A491A93F84100200843 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E83F7A181A93F42E00200843 /* Resources */ = {
@@ -342,13 +310,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D8CF4E1A9886EC00944D37 /* GSRTMethod.m in Sources */,
 				E83F7A2A1A93F51D00200843 /* GSConfiguration.m in Sources */,
+				E8D8CF4C1A9886EC00944D37 /* GSMARTNSObject.m in Sources */,
+				E8D8CF501A9886EC00944D37 /* GSRTProtocol.m in Sources */,
 				E83F7A2E1A93F51D00200843 /* GSConfigurationManager.m in Sources */,
 				E83F7A301A93F51D00200843 /* GSDictionarySource.m in Sources */,
 				E83F7A341A93F51D00200843 /* GSRemoteSource.m in Sources */,
+				E8D8CF4F1A9886EC00944D37 /* GSRTProperty.m in Sources */,
+				E8D8CF511A9886EC00944D37 /* GSRTUnregisteredClass.m in Sources */,
 				E83F7A361A93F51D00200843 /* GSSource.m in Sources */,
 				E83F7A3B1A93F51D00200843 /* GSUserDefaultsStore.m in Sources */,
 				E83F7A3D1A93F51D00200843 /* GSURLStringTransformer.m in Sources */,
+				E8D8CF4D1A9886EC00944D37 /* GSRTIvar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,11 +342,6 @@
 			isa = PBXTargetDependency;
 			target = E83F7A0F1A93F42E00200843 /* GSConfiguration-iOS */;
 			targetProxy = E83F7A1C1A93F42E00200843 /* PBXContainerItemProxy */;
-		};
-		E83F7A4C1A93F85100200843 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MAObjCRuntime_iOS;
-			targetProxy = E83F7A4B1A93F85100200843 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -409,6 +378,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/GSConfiguration/ThirdParty/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -442,6 +416,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/GSConfiguration/ThirdParty/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

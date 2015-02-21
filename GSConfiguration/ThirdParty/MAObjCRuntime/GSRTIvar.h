@@ -3,7 +3,7 @@
 #import <objc/runtime.h>
 
 
-@interface RTIvar : NSObject
+@interface GSRTIvar : NSObject
 {
 }
 

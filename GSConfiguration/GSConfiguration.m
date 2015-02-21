@@ -3,21 +3,21 @@
 //
 
 #import "GSConfiguration.h"
-#import "ThirdParty/MAObjCRuntime/RTProperty.h"
-#import "ThirdParty/MAObjcRuntime/MARTNSObject.h"
 #import "GSConfigurationManager.h"
 #import "GSConfigurationLogging.h"
+#import "GSRTProperty.h"
+#import "GSMARTNSObject.h"
 
 #define GENERATE_NSNUMBER_SETTER(typeName, upperTypeName) \
 - (void)setConfig##upperTypeName:(typeName)value { \
-    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
+    GSRTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     NSNumber *number = [NSNumber numberWith##upperTypeName:value]; \
     [GSConfigurationManager setConfigValue:number forKey:property.name withClass:nil]; \
 }
 
 #define GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName) \
 - (typeName)getConfig##upperTypeName { \
-    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
+    GSRTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil]; \
     typeName value = [[GSConfigurationManager configValueForKey:property.name withClass:nil] nsNumberName##Value]; \
     return value; \
 }
@@ -39,7 +39,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 }
 
 - (void)setConfigObject:(id)value {
-    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
+    GSRTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     
     BOOL setWithCopy = [property.attributes[RTPropertyCopyAttribute] boolValue];
 
@@ -56,7 +56,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 }
 
 - (id)getConfigObject {
-    RTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
+    GSRTProperty *property = [[self class] dynamicPropertyForSelector:_cmd isSetter:nil];
     NSString *clazz = [GSConfiguration extractClassFromEncoding:property.typeEncoding];
     id value = [GSConfigurationManager configValueForKey:property.name withClass:clazz];
     
@@ -79,7 +79,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     BOOL isSetter = NO;
-    RTProperty *property = [self dynamicPropertyForSelector:sel isSetter:&isSetter];
+    GSRTProperty *property = [self dynamicPropertyForSelector:sel isSetter:&isSetter];
     
     if (property) {
         [self addMethodForSelector:sel property:property isSetter:isSetter];
@@ -90,7 +90,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
     return [super resolveInstanceMethod:sel];
 }
 
-+ (void)addMethodForSelector:(SEL)sel property:(RTProperty *)property isSetter:(BOOL)isSetter {
++ (void)addMethodForSelector:(SEL)sel property:(GSRTProperty *)property isSetter:(BOOL)isSetter {
     const char *impEncoding;
     SEL subSel = nil;
     unichar type = [property.typeEncoding characterAtIndex:0];
@@ -212,7 +212,7 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
     }
 }
 
-+ (RTProperty *)dynamicPropertyForSelector:(SEL)sel isSetter:(BOOL *)isSetter {
++ (GSRTProperty *)dynamicPropertyForSelector:(SEL)sel isSetter:(BOOL *)isSetter {
     NSString *propName = NSStringFromSelector(sel);
     if ([[propName substringToIndex:3] isEqualToString:@"set"]) {
         if (isSetter) {
@@ -223,11 +223,11 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
                                                      withString:[[propName substringToIndex:1] lowercaseString]];
         propName = [propName stringByReplacingOccurrencesOfString:@":" withString:@""];
     }
-    RTProperty *property = [self rt_propertyForName:propName];
+    GSRTProperty *property = [self gsrt_propertyForName:propName];
     if (property) {
         return property;
     } else {
-        for (RTProperty *prop in [self rt_properties]) {
+        for (GSRTProperty *prop in [self gsrt_properties]) {
             if (prop.isDynamic && strcmp(sel_getName(prop.customGetter), sel_getName(sel)) == 0) {
                 if (isSetter) {
                     *isSetter = NO;

@@ -3,7 +3,7 @@
 #import <objc/runtime.h>
 
 
-@interface RTProtocol : NSObject
+@interface GSRTProtocol : NSObject
 {
 }
 

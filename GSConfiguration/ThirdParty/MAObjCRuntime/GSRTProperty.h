@@ -11,7 +11,7 @@ typedef enum
 }
 RTPropertySetterSemantics;
 
-@interface RTProperty : NSObject
+@interface GSRTProperty : NSObject
 {
 }
 

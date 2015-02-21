@@ -1,8 +1,8 @@
 
-#import "RTProperty.h"
+#import "GSRTProperty.h"
 
 
-@interface _RTObjCProperty : RTProperty
+@interface _RTObjCProperty : GSRTProperty
 {
     objc_property_t _property;
     NSMutableDictionary *_attrs;
@@ -155,7 +155,7 @@
 
 @end
 
-@implementation RTProperty
+@implementation GSRTProperty
 
 + (id)propertyWithObjCProperty: (objc_property_t)property
 {
@@ -186,7 +186,7 @@
 
 - (BOOL)isEqual: (id)other
 {
-    return [other isKindOfClass: [RTProperty class]] &&
+    return [other isKindOfClass: [GSRTProperty class]] &&
            [[self name] isEqual: [other name]] &&
            ([self attributeEncodings] ? [[self attributeEncodings] isEqual: [other attributeEncodings]] : ![other attributeEncodings]) &&
            [[self typeEncoding] isEqual: [other typeEncoding]] &&

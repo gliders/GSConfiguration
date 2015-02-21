@@ -2,12 +2,12 @@
 #import <Foundation/Foundation.h>
 
 
-@class RTProtocol;
-@class RTIvar;
-@class RTMethod;
-@class RTProperty;
+@class GSRTProtocol;
+@class GSRTIvar;
+@class GSRTMethod;
+@class GSRTProperty;
 
-@interface RTUnregisteredClass : NSObject
+@interface GSRTUnregisteredClass : NSObject
 {
     Class _class;
 }
@@ -18,11 +18,11 @@
 - (id)initWithName: (NSString *)name withSuperclass: (Class)superclass;
 - (id)initWithName: (NSString *)name;
 
-- (void)addProtocol: (RTProtocol *)protocol;
-- (void)addIvar: (RTIvar *)ivar;
-- (void)addMethod: (RTMethod *)method;
+- (void)addProtocol: (GSRTProtocol *)protocol;
+- (void)addIvar: (GSRTIvar *)ivar;
+- (void)addMethod: (GSRTMethod *)method;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1070
-- (void)addProperty: (RTProperty *)property;
+- (void)addProperty: (GSRTProperty *)property;
 #endif
 
 - (Class)registerClass;

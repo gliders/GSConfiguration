@@ -13,10 +13,11 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/gliders/GSConfiguration.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/RyanBrignoni'
 
-  s.platform     = :ios, '8.0'
-  s.requires_arc = true
+  s.requires_arc = ['GSConfiguration/*.m', 'GSConfiguration/Transformers/*.m']
+
+  s.platform = :ios, '8.1'
 
   s.source_files = 'GSConfiguration/**/*.{h,m}'
-
   s.public_header_files = 'GSConfiguration/**/*.h'
+  s.private_header_files = 'GSConfiguration/ThirdParty/**/*.h'
 end

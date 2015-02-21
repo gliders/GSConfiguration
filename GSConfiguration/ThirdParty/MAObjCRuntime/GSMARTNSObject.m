@@ -1,18 +1,18 @@
 
-#import "MARTNSObject.h"
+#import "GSMARTNSObject.h"
 
 #import <objc/runtime.h>
 
-#import "RTProtocol.h"
-#import "RTIvar.h"
-#import "RTProperty.h"
-#import "RTMethod.h"
-#import "RTUnregisteredClass.h"
+#import "GSRTProtocol.h"
+#import "GSRTIvar.h"
+#import "GSRTProperty.h"
+#import "GSRTMethod.h"
+#import "GSRTUnregisteredClass.h"
 
 
-@implementation NSObject (MARuntime)
+@implementation NSObject (GS_MARuntime)
 
-+ (NSArray *)rt_subclasses
++ (NSArray *)gsrt_subclasses
 {
     Class *buffer = NULL;
     
@@ -43,22 +43,22 @@
     return array;
 }
 
-+ (RTUnregisteredClass *)rt_createUnregisteredSubclassNamed: (NSString *)name
++ (GSRTUnregisteredClass *)gsrt_createUnregisteredSubclassNamed: (NSString *)name
 {
-    return [RTUnregisteredClass unregisteredClassWithName: name withSuperclass: self];
+    return [GSRTUnregisteredClass unregisteredClassWithName:name withSuperclass:self];
 }
 
-+ (Class)rt_createSubclassNamed: (NSString *)name
++ (Class)gsrt_createSubclassNamed: (NSString *)name
 {
-    return [[self rt_createUnregisteredSubclassNamed: name] registerClass];
+    return [[self gsrt_createUnregisteredSubclassNamed:name] registerClass];
 }
 
-+ (void)rt_destroyClass
++ (void)gsrt_destroyClass
 {
     objc_disposeClassPair(self);
 }
 
-+ (BOOL)rt_isMetaClass
++ (BOOL)gsrt_isMetaClass
 {
     return class_isMetaClass(self);
 }
@@ -67,7 +67,7 @@
 #pragma clang diagnostic push
 #endif
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-+ (Class)rt_setSuperclass: (Class)newSuperclass
++ (Class)gsrt_setSuperclass: (Class)newSuperclass
 {
     return class_setSuperclass(self, newSuperclass);
 }
@@ -75,103 +75,103 @@
 #pragma clang diagnostic pop
 #endif
 
-+ (size_t)rt_instanceSize
++ (size_t)gsrt_instanceSize
 {
     return class_getInstanceSize(self);
 }
 
-+ (NSArray *)rt_protocols
++ (NSArray *)gsrt_protocols
 {
     unsigned int count;
     Protocol **protocols = class_copyProtocolList(self, &count);
     
     NSMutableArray *array = [NSMutableArray array];
     for(unsigned i = 0; i < count; i++)
-        [array addObject: [RTProtocol protocolWithObjCProtocol: protocols[i]]];
+        [array addObject: [GSRTProtocol protocolWithObjCProtocol:protocols[i]]];
     
     free(protocols);
     return array;
 }
 
-+ (NSArray *)rt_methods
++ (NSArray *)gsrt_methods
 {
     unsigned int count;
     Method *methods = class_copyMethodList(self, &count);
     
     NSMutableArray *array = [NSMutableArray array];
     for(unsigned i = 0; i < count; i++)
-        [array addObject: [RTMethod methodWithObjCMethod: methods[i]]];
+        [array addObject: [GSRTMethod methodWithObjCMethod:methods[i]]];
     
     free(methods);
     return array;
 }
 
-+ (RTMethod *)rt_methodForSelector: (SEL)sel
++ (GSRTMethod *)gsrt_methodForSelector: (SEL)sel
 {
     Method m = class_getInstanceMethod(self, sel);
     if(!m) return nil;
     
-    return [RTMethod methodWithObjCMethod: m];
+    return [GSRTMethod methodWithObjCMethod:m];
 }
 
-+ (void)rt_addMethod: (RTMethod *)method
++ (void)gsrt_addMethod: (GSRTMethod *)method
 {
     class_addMethod(self, [method selector], [method implementation], [[method signature] UTF8String]);
 }
 
-+ (NSArray *)rt_ivars
++ (NSArray *)gsrt_ivars
 {
     unsigned int count;
     Ivar *list = class_copyIvarList(self, &count);
     
     NSMutableArray *array = [NSMutableArray array];
     for(unsigned i = 0; i < count; i++)
-        [array addObject: [RTIvar ivarWithObjCIvar: list[i]]];
+        [array addObject: [GSRTIvar ivarWithObjCIvar:list[i]]];
     
     free(list);
     return array;
 }
 
-+ (RTIvar *)rt_ivarForName: (NSString *)name
++ (GSRTIvar *)gsrt_ivarForName: (NSString *)name
 {
     Ivar ivar = class_getInstanceVariable(self, [name UTF8String]);
     if(!ivar) return nil;
-    return [RTIvar ivarWithObjCIvar: ivar];
+    return [GSRTIvar ivarWithObjCIvar:ivar];
 }
 
-+ (NSArray *)rt_properties
++ (NSArray *)gsrt_properties
 {
     unsigned int count;
     objc_property_t *list = class_copyPropertyList(self, &count);
     
     NSMutableArray *array = [NSMutableArray array];
     for(unsigned i = 0; i < count; i++)
-        [array addObject: [RTProperty propertyWithObjCProperty: list[i]]];
+        [array addObject: [GSRTProperty propertyWithObjCProperty:list[i]]];
     
     free(list);
     return array;
 }
 
-+ (RTProperty *)rt_propertyForName: (NSString *)name
++ (GSRTProperty *)gsrt_propertyForName: (NSString *)name
 {
     objc_property_t property = class_getProperty(self, [name UTF8String]);
     if(!property) return nil;
-    return [RTProperty propertyWithObjCProperty: property];
+    return [GSRTProperty propertyWithObjCProperty:property];
 }
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1070
-+ (BOOL)rt_addProperty: (RTProperty *)property
++ (BOOL)gsrt_addProperty: (GSRTProperty *)property
 {
     return [property addToClass:self];
 }
 #endif
 
-- (Class)rt_class
+- (Class)gsrt_class
 {
     return object_getClass(self);
 }
 
-- (Class)rt_setClass: (Class)newClass
+- (Class)gsrt_setClass: (Class)newClass
 {
     return object_setClass(self, newClass);
 }

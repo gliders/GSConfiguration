@@ -1,9 +1,9 @@
 
-#import "RTProtocol.h"
-#import "RTMethod.h"
+#import "GSRTProtocol.h"
+#import "GSRTMethod.h"
 
 
-@interface _RTObjCProtocol : RTProtocol
+@interface _RTObjCProtocol : GSRTProtocol
 {
     Protocol *_protocol;
 }
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation RTProtocol
+@implementation GSRTProtocol
 
 + (NSArray *)allProtocols
 {
@@ -70,7 +70,7 @@
 
 - (BOOL)isEqual: (id)other
 {
-    return [other isKindOfClass: [RTProtocol class]] &&
+    return [other isKindOfClass: [GSRTProtocol class]] &&
            protocol_isEqual([self objCProtocol], [other objCProtocol]);
 }
 
@@ -97,7 +97,7 @@
     
     NSMutableArray *array = [NSMutableArray array];
     for(unsigned i = 0; i < count; i++)
-        [array addObject: [RTProtocol protocolWithObjCProtocol: protocols[i]]];
+        [array addObject: [GSRTProtocol protocolWithObjCProtocol:protocols[i]]];
     
     free(protocols);
     return array;
@@ -112,7 +112,7 @@
     for(unsigned i = 0; i < count; i++)
     {
         NSString *signature = [NSString stringWithCString: methods[i].types encoding: [NSString defaultCStringEncoding]];
-        [array addObject: [RTMethod methodWithSelector: methods[i].name implementation: NULL signature: signature]];
+        [array addObject: [GSRTMethod methodWithSelector:methods[i].name implementation:NULL signature:signature]];
     }
     
     free(methods);

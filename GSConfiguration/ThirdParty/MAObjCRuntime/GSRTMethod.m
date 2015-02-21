@@ -1,12 +1,12 @@
 
-#import "RTMethod.h"
+#import "GSRTMethod.h"
 
 #import <stdarg.h>
 
-#import "MARTNSObject.h"
+#import "GSMARTNSObject.h"
 
 
-@interface _RTObjCMethod : RTMethod
+@interface _RTObjCMethod : GSRTMethod
 {
     Method _m;
 }
@@ -46,7 +46,7 @@
 
 @end
 
-@interface _RTComponentsMethod : RTMethod
+@interface _RTComponentsMethod : GSRTMethod
 {
     SEL _sel;
     IMP _imp;
@@ -96,7 +96,7 @@
 
 @end
 
-@implementation RTMethod
+@implementation GSRTMethod
 
 + (id)methodWithObjCMethod: (Method)method
 {
@@ -127,7 +127,7 @@
 
 - (BOOL)isEqual: (id)other
 {
-    return [other isKindOfClass: [RTMethod class]] &&
+    return [other isKindOfClass: [GSRTMethod class]] &&
            [self selector] == [other selector] &&
            [self implementation] == [other implementation] &&
            [[self signature] isEqual: [other signature]];
@@ -229,9 +229,9 @@
 
 @end
 
-@implementation NSObject (RTMethodSendingAdditions)
+@implementation NSObject (GSRTMethodSendingAdditions)
 
-- (id)rt_sendMethod: (RTMethod *)method, ...
+- (id)gsrt_sendMethod: (GSRTMethod *)method, ...
 {
     NSParameterAssert([[method signature] hasPrefix: [NSString stringWithUTF8String: @encode(id)]]);
     
@@ -245,7 +245,7 @@
     return retVal;
 }
 
-- (void)rt_returnValue: (void *)retPtr sendMethod: (RTMethod *)method, ...
+- (void)gsrt_returnValue:(void *)retPtr sendMethod: (GSRTMethod *)method, ...
 {
     va_list args;
     va_start(args, method);
@@ -253,9 +253,9 @@
     va_end(args);
 }
 
-- (id)rt_sendSelector: (SEL)sel, ...
+- (id)gsrt_sendSelector: (SEL)sel, ...
 {
-    RTMethod *method = [[self rt_class] rt_methodForSelector: sel];
+    GSRTMethod *method = [[self gsrt_class] gsrt_methodForSelector:sel];
     NSParameterAssert([[method signature] hasPrefix: [NSString stringWithUTF8String: @encode(id)]]);
     
     id retVal = nil;
@@ -268,9 +268,9 @@
     return retVal;
 }
 
-- (void)rt_returnValue: (void *)retPtr sendSelector: (SEL)sel, ...
+- (void)gsrt_returnValue:(void *)retPtr sendSelector: (SEL)sel, ...
 {
-    RTMethod *method = [[self rt_class] rt_methodForSelector: sel];
+    GSRTMethod *method = [[self gsrt_class] gsrt_methodForSelector:sel];
     va_list args;
     va_start(args, sel);
     [method _returnValue: retPtr sendToTarget: self arguments: args];

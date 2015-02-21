@@ -3,7 +3,7 @@
 #import <objc/runtime.h>
 
 
-@interface RTMethod : NSObject
+@interface GSRTMethod : NSObject
 {
 }
 
@@ -36,12 +36,12 @@
 
 @end
 
-@interface NSObject (RTMethodSendingAdditions)
+@interface NSObject (GSRTMethodSendingAdditions)
 
-- (id)rt_sendMethod: (RTMethod *)method, ...;
-- (void)rt_returnValue: (void *)retPtr sendMethod: (RTMethod *)method, ...;
+- (id)gsrt_sendMethod: (GSRTMethod *)method, ...;
+- (void)gsrt_returnValue:(void *)retPtr sendMethod: (GSRTMethod *)method, ...;
 
-- (id)rt_sendSelector: (SEL)sel, ...;
-- (void)rt_returnValue: (void *)retPtr sendSelector: (SEL)sel, ...;
+- (id)gsrt_sendSelector: (SEL)sel, ...;
+- (void)gsrt_returnValue:(void *)retPtr sendSelector: (SEL)sel, ...;
 
 @end

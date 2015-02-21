@@ -1,8 +1,8 @@
 
-#import "RTIvar.h"
+#import "GSRTIvar.h"
 
 
-@interface _RTObjCIvar : RTIvar
+@interface _RTObjCIvar : GSRTIvar
 {
     Ivar _ivar;
 }
@@ -35,7 +35,7 @@
 
 @end
 
-@interface _RTComponentsIvar : RTIvar
+@interface _RTComponentsIvar : GSRTIvar
 {
     NSString *_name;
     NSString *_typeEncoding;
@@ -78,7 +78,7 @@
 
 @end
 
-@implementation RTIvar
+@implementation GSRTIvar
 
 + (id)ivarWithObjCIvar: (Ivar)ivar
 {
@@ -114,7 +114,7 @@
 
 - (BOOL)isEqual: (id)other
 {
-    return [other isKindOfClass: [RTIvar class]] &&
+    return [other isKindOfClass: [GSRTIvar class]] &&
            [[self name] isEqual: [other name]] &&
            [[self typeEncoding] isEqual: [other typeEncoding]];
 }
