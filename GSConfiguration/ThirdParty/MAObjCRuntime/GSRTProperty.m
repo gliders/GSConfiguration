@@ -2,7 +2,7 @@
 #import "GSRTProperty.h"
 
 
-@interface _RTObjCProperty : GSRTProperty
+@interface _GSRTObjCProperty : GSRTProperty
 {
     objc_property_t _property;
     NSMutableDictionary *_attrs;
@@ -10,7 +10,7 @@
 }
 @end
 
-@implementation _RTObjCProperty
+@implementation _GSRTObjCProperty
 
 - (id)initWithObjCProperty: (objc_property_t)property
 {
@@ -80,7 +80,7 @@
     NSMutableArray *filteredAttributes = [NSMutableArray arrayWithCapacity:[_attrs count] - 2];
     for (NSString *attrKey in _attrs)
     {
-        if (![attrKey isEqualToString:RTPropertyTypeEncodingAttribute] && ![attrKey isEqualToString:RTPropertyBackingIVarNameAttribute])
+        if (![attrKey isEqualToString:GSRTPropertyTypeEncodingAttribute] && ![attrKey isEqualToString:GSRTPropertyBackingIVarNameAttribute])
             [filteredAttributes addObject:[_attrs objectForKey:attrKey]];
     }
     return [filteredAttributes componentsJoinedByString: @","];
@@ -93,34 +93,34 @@
 
 - (BOOL)isReadOnly
 {
-    return [self hasAttribute: RTPropertyReadOnlyAttribute];
+    return [self hasAttribute: GSRTPropertyReadOnlyAttribute];
 }
 
-- (RTPropertySetterSemantics)setterSemantics
+- (GSRTPropertySetterSemantics)setterSemantics
 {
-    if([self hasAttribute: RTPropertyCopyAttribute]) return RTPropertySetterSemanticsCopy;
-    if([self hasAttribute: RTPropertyRetainAttribute]) return RTPropertySetterSemanticsRetain;
-    return RTPropertySetterSemanticsAssign;
+    if([self hasAttribute: GSRTPropertyCopyAttribute]) return GSRTPropertySetterSemanticsCopy;
+    if([self hasAttribute: GSRTPropertyRetainAttribute]) return GSRTPropertySetterSemanticsRetain;
+    return GSRTPropertySetterSemanticsAssign;
 }
 
 - (BOOL)isNonAtomic
 {
-    return [self hasAttribute: RTPropertyNonAtomicAttribute];
+    return [self hasAttribute: GSRTPropertyNonAtomicAttribute];
 }
 
 - (BOOL)isDynamic
 {
-    return [self hasAttribute: RTPropertyDynamicAttribute];
+    return [self hasAttribute: GSRTPropertyDynamicAttribute];
 }
 
 - (BOOL)isWeakReference
 {
-    return [self hasAttribute: RTPropertyWeakReferenceAttribute];
+    return [self hasAttribute: GSRTPropertyWeakReferenceAttribute];
 }
 
 - (BOOL)isEligibleForGarbageCollection
 {
-    return [self hasAttribute: RTPropertyEligibleForGarbageCollectionAttribute];
+    return [self hasAttribute: GSRTPropertyEligibleForGarbageCollectionAttribute];
 }
 
 - (NSString *)contentOfAttribute: (NSString *)code
@@ -130,27 +130,27 @@
 
 - (SEL)customGetter
 {
-    return NSSelectorFromString([self contentOfAttribute: RTPropertyCustomGetterAttribute]);
+    return NSSelectorFromString([self contentOfAttribute: GSRTPropertyCustomGetterAttribute]);
 }
 
 - (SEL)customSetter
 {
-    return NSSelectorFromString([self contentOfAttribute: RTPropertyCustomSetterAttribute]);
+    return NSSelectorFromString([self contentOfAttribute: GSRTPropertyCustomSetterAttribute]);
 }
 
 - (NSString *)typeEncoding
 {
-    return [self contentOfAttribute: RTPropertyTypeEncodingAttribute];
+    return [self contentOfAttribute: GSRTPropertyTypeEncodingAttribute];
 }
 
 - (NSString *)oldTypeEncoding
 {
-    return [self contentOfAttribute: RTPropertyOldTypeEncodingAttribute];
+    return [self contentOfAttribute: GSRTPropertyOldTypeEncodingAttribute];
 }
 
 - (NSString *)ivarName
 {
-    return [self contentOfAttribute: RTPropertyBackingIVarNameAttribute];
+    return [self contentOfAttribute: GSRTPropertyBackingIVarNameAttribute];
 }
 
 @end
@@ -170,13 +170,13 @@
 - (id)initWithObjCProperty: (objc_property_t)property
 {
     [self release];
-    return [[_RTObjCProperty alloc] initWithObjCProperty: property];
+    return [[_GSRTObjCProperty alloc] initWithObjCProperty: property];
 }
 
 - (id)initWithName: (NSString *)name attributes:(NSDictionary *)attributes
 {
     [self release];
-    return [[_RTObjCProperty alloc] initWithName: name attributes: attributes];
+    return [[_GSRTObjCProperty alloc] initWithName: name attributes: attributes];
 }
 
 - (NSString *)description
@@ -227,10 +227,10 @@
     [self doesNotRecognizeSelector: _cmd];
     return NO;
 }
-- (RTPropertySetterSemantics)setterSemantics
+- (GSRTPropertySetterSemantics)setterSemantics
 {
     [self doesNotRecognizeSelector: _cmd];
-    return RTPropertySetterSemanticsAssign;
+    return GSRTPropertySetterSemanticsAssign;
 }
 
 - (BOOL)isNonAtomic
@@ -289,15 +289,15 @@
 
 @end
 
-NSString * const RTPropertyTypeEncodingAttribute                  = @"T";
-NSString * const RTPropertyBackingIVarNameAttribute               = @"V";
-NSString * const RTPropertyCopyAttribute                          = @"C";
-NSString * const RTPropertyCustomGetterAttribute                  = @"G";
-NSString * const RTPropertyCustomSetterAttribute                  = @"S";
-NSString * const RTPropertyDynamicAttribute                       = @"D";
-NSString * const RTPropertyEligibleForGarbageCollectionAttribute  = @"P";
-NSString * const RTPropertyNonAtomicAttribute                     = @"N";
-NSString * const RTPropertyOldTypeEncodingAttribute               = @"t";
-NSString * const RTPropertyReadOnlyAttribute                      = @"R";
-NSString * const RTPropertyRetainAttribute                        = @"&";
-NSString * const RTPropertyWeakReferenceAttribute                 = @"W";
+NSString * const GSRTPropertyTypeEncodingAttribute                  = @"T";
+NSString * const GSRTPropertyBackingIVarNameAttribute               = @"V";
+NSString * const GSRTPropertyCopyAttribute                          = @"C";
+NSString * const GSRTPropertyCustomGetterAttribute                  = @"G";
+NSString * const GSRTPropertyCustomSetterAttribute                  = @"S";
+NSString * const GSRTPropertyDynamicAttribute                       = @"D";
+NSString * const GSRTPropertyEligibleForGarbageCollectionAttribute  = @"P";
+NSString * const GSRTPropertyNonAtomicAttribute                     = @"N";
+NSString * const GSRTPropertyOldTypeEncodingAttribute               = @"t";
+NSString * const GSRTPropertyReadOnlyAttribute                      = @"R";
+NSString * const GSRTPropertyRetainAttribute                        = @"&";
+NSString * const GSRTPropertyWeakReferenceAttribute                 = @"W";

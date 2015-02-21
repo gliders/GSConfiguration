@@ -3,13 +3,13 @@
 #import "GSRTMethod.h"
 
 
-@interface _RTObjCProtocol : GSRTProtocol
+@interface _GSRTObjCProtocol : GSRTProtocol
 {
     Protocol *_protocol;
 }
 @end
 
-@implementation _RTObjCProtocol
+@implementation _GSRTObjCProtocol
 
 - (id)initWithObjCProtocol: (Protocol *)protocol
 {
@@ -55,7 +55,7 @@
 - (id)initWithObjCProtocol: (Protocol *)protocol
 {
     [self release];
-    return [[_RTObjCProtocol alloc] initWithObjCProtocol: protocol];
+    return [[_GSRTObjCProtocol alloc] initWithObjCProtocol: protocol];
 }
 
 - (id)initWithName: (NSString *)name

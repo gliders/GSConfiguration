@@ -6,14 +6,14 @@
 #import "GSMARTNSObject.h"
 
 
-@interface _RTObjCMethod : GSRTMethod
+@interface _GSRTObjCMethod : GSRTMethod
 {
     Method _m;
 }
 
 @end
 
-@implementation _RTObjCMethod
+@implementation _GSRTObjCMethod
 
 - (id)initWithObjCMethod: (Method)method
 {
@@ -46,7 +46,7 @@
 
 @end
 
-@interface _RTComponentsMethod : GSRTMethod
+@interface _GSRTComponentsMethod : GSRTMethod
 {
     SEL _sel;
     IMP _imp;
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation _RTComponentsMethod
+@implementation _GSRTComponentsMethod
 
 - (id)initWithSelector: (SEL)sel implementation: (IMP)imp signature: (NSString *)signature
 {
@@ -111,13 +111,13 @@
 - (id)initWithObjCMethod: (Method)method
 {
     [self release];
-    return [[_RTObjCMethod alloc] initWithObjCMethod: method];
+    return [[_GSRTObjCMethod alloc] initWithObjCMethod: method];
 }
 
 - (id)initWithSelector: (SEL)sel implementation: (IMP)imp signature: (NSString *)signature
 {
     [self release];
-    return [[_RTComponentsMethod alloc] initWithSelector: sel implementation: imp signature: signature];
+    return [[_GSRTComponentsMethod alloc] initWithSelector: sel implementation: imp signature: signature];
 }
 
 - (NSString *)description
@@ -177,7 +177,7 @@
     for(NSUInteger i = 2; i < argumentCount; i++)
     {
         int cookie = va_arg(args, int);
-        if(cookie != RT_ARG_MAGIC_COOKIE)
+        if(cookie != GSRT_ARG_MAGIC_COOKIE)
         {
             NSLog(@"%s: incorrect magic cookie %08x; did you forget to use RTARG() around your arguments?", __func__, cookie);
             abort();

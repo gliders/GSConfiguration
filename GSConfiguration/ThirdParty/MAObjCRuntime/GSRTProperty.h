@@ -5,11 +5,11 @@
 
 typedef enum
 {
-    RTPropertySetterSemanticsAssign,
-    RTPropertySetterSemanticsRetain,
-    RTPropertySetterSemanticsCopy
+    GSRTPropertySetterSemanticsAssign,
+    GSRTPropertySetterSemanticsRetain,
+    GSRTPropertySetterSemanticsCopy
 }
-RTPropertySetterSemantics;
+GSRTPropertySetterSemantics;
 
 @interface GSRTProperty : NSObject
 {
@@ -28,7 +28,7 @@ RTPropertySetterSemantics;
 
 - (NSString *)attributeEncodings;
 - (BOOL)isReadOnly;
-- (RTPropertySetterSemantics)setterSemantics;
+- (GSRTPropertySetterSemantics)setterSemantics;
 - (BOOL)isNonAtomic;
 - (BOOL)isDynamic;
 - (BOOL)isWeakReference;
@@ -42,16 +42,16 @@ RTPropertySetterSemantics;
 
 @end
 
-extern NSString * const RTPropertyTypeEncodingAttribute;
-extern NSString * const RTPropertyBackingIVarNameAttribute;
+extern NSString * const GSRTPropertyTypeEncodingAttribute;
+extern NSString * const GSRTPropertyBackingIVarNameAttribute;
 
-extern NSString * const RTPropertyCopyAttribute;
-extern NSString * const RTPropertyRetainAttribute;
-extern NSString * const RTPropertyCustomGetterAttribute;
-extern NSString * const RTPropertyCustomSetterAttribute;
-extern NSString * const RTPropertyDynamicAttribute;
-extern NSString * const RTPropertyEligibleForGarbageCollectionAttribute;
-extern NSString * const RTPropertyNonAtomicAttribute;
-extern NSString * const RTPropertyOldTypeEncodingAttribute;
-extern NSString * const RTPropertyReadOnlyAttribute;
-extern NSString * const RTPropertyWeakReferenceAttribute;
+extern NSString * const GSRTPropertyCopyAttribute;
+extern NSString * const GSRTPropertyRetainAttribute;
+extern NSString * const GSRTPropertyCustomGetterAttribute;
+extern NSString * const GSRTPropertyCustomSetterAttribute;
+extern NSString * const GSRTPropertyDynamicAttribute;
+extern NSString * const GSRTPropertyEligibleForGarbageCollectionAttribute;
+extern NSString * const GSRTPropertyNonAtomicAttribute;
+extern NSString * const GSRTPropertyOldTypeEncodingAttribute;
+extern NSString * const GSRTPropertyReadOnlyAttribute;
+extern NSString * const GSRTPropertyWeakReferenceAttribute;

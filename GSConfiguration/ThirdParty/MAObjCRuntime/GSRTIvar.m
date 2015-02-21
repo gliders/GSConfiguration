@@ -2,13 +2,13 @@
 #import "GSRTIvar.h"
 
 
-@interface _RTObjCIvar : GSRTIvar
+@interface _GSRTObjCIvar : GSRTIvar
 {
     Ivar _ivar;
 }
 @end
 
-@implementation _RTObjCIvar
+@implementation _GSRTObjCIvar
 
 - (id)initWithObjCIvar: (Ivar)ivar
 {
@@ -35,14 +35,14 @@
 
 @end
 
-@interface _RTComponentsIvar : GSRTIvar
+@interface _GSRTComponentsIvar : GSRTIvar
 {
     NSString *_name;
     NSString *_typeEncoding;
 }
 @end
 
-@implementation _RTComponentsIvar
+@implementation _GSRTComponentsIvar
 
 - (id)initWithName: (NSString *)name typeEncoding: (NSString *)typeEncoding
 {
@@ -98,13 +98,13 @@
 - (id)initWithObjCIvar: (Ivar)ivar
 {
     [self release];
-    return [[_RTObjCIvar alloc] initWithObjCIvar: ivar];
+    return [[_GSRTObjCIvar alloc] initWithObjCIvar: ivar];
 }
 
 - (id)initWithName: (NSString *)name typeEncoding: (NSString *)typeEncoding
 {
     [self release];
-    return [[_RTComponentsIvar alloc] initWithName: name typeEncoding: typeEncoding];
+    return [[_GSRTComponentsIvar alloc] initWithName: name typeEncoding: typeEncoding];
 }
 
 - (NSString *)description

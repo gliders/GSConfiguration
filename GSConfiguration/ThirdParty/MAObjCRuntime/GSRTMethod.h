@@ -29,8 +29,8 @@
 // (you can pass NULL if you don't care about the return value)
 // all arguments MUST BE WRAPPED in RTARG, e.g.:
 // [method sendToTarget: target, RTARG(arg1), RTARG(arg2)]
-#define RT_ARG_MAGIC_COOKIE 0xdeadbeef
-#define RTARG(expr) RT_ARG_MAGIC_COOKIE, @encode(__typeof__(expr)), (__typeof__(expr) []){ expr }
+#define GSRT_ARG_MAGIC_COOKIE 0xdeadbeef
+#define GSRTARG(expr) RT_ARG_MAGIC_COOKIE, @encode(__typeof__(expr)), (__typeof__(expr) []){ expr }
 - (id)sendToTarget: (id)target, ...;
 - (void)returnValue: (void *)retPtr sendToTarget: (id)target, ...;
 
