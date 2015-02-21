@@ -15,7 +15,7 @@
 + (void)setStore:(id <GSStore>)store;
 + (void)addSource:(GSSource *)source;
 + (void)cleanUp;
-
++ (void)registerTransformerName:(NSString *)transformerName forClass:(Class)type;
 + (instancetype)defaultManager;
 
 @end
