@@ -148,8 +148,6 @@ Turn on logging by defining a macro:
 #define GS_CONFIG_LOGGING_ENABLED 1
 ```
 
-If CocoaLumberjack is present, GSConfiguration will automatically use that instead. 
-
 ## Future Plans
 
  * Facade Key-Value Observing support
