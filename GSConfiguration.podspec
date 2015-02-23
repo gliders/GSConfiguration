@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "GSConfiguration"
-  s.version          = "0.1.0"
+  s.version          = "0.1.0-beta1"
   s.summary          = "A type-safe, generalized configuration library for iOS applications."
   s.description      = <<-DESC
                        A type-safe, generalized configuration library for iOS applications. Supports multiple local
