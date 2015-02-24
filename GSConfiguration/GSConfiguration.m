@@ -143,6 +143,15 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
             }
             case 'B': {
                 subSel = @selector(setConfigBool:);
+                break;
+            }
+            case 'q': {
+                subSel = @selector(setConfigLongLong:);
+                break;
+            }
+            case 'Q': {
+                subSel = @selector(setConfigUnsignedLongLong:);
+                break;
             }
             default: {
                 GSLogWarn(@"unsupported configuration type %c", type);
@@ -198,6 +207,15 @@ GENERATE_COMPLEX_NSNUMBER_GETTER(typeName, upperTypeName, nsNumberName)
             }
             case 'B': {
                 subSel = @selector(getConfigBool);
+                break;
+            }
+            case 'q': {
+                subSel = @selector(getConfigLongLong);
+                break;
+            }
+            case 'Q': {
+                subSel = @selector(getConfigUnsignedLongLong);
+                break;
             }
             default: {
                 GSLogWarn(@"unsupported configuration type %c", type);
@@ -256,6 +274,8 @@ GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned char, UnsignedChar, unsignedChar)
 GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned short, UnsignedShort, unsignedShort)
 GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned int, UnsignedInt, unsignedInt)
 GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned long, UnsignedLong, unsignedLong)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(long long, LongLong, longLong)
+GENERATE_COMPLEX_NSNUMBER_ACCESSORS(unsigned long long, UnsignedLongLong, unsignedLongLong)
 
 #define STD_BOOL bool
 #undef bool
