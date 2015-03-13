@@ -11,5 +11,6 @@
 
 + (instancetype)sourceWithDictionary:(NSDictionary *)dictionary;
 + (instancetype)sourceWithPListNamed:(NSString *)name;
++ (instancetype)sourceWithJSONFileNamed:(NSString *)name;
 
 @end
