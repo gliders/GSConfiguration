@@ -6,7 +6,6 @@
 
 @interface GSUserDefaultsStore ()
 
-@property (nonatomic, readwrite, getter=isInitialized) BOOL initialized;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 
 @end
@@ -24,11 +23,7 @@
 }
 
 - (void)setStoreDefaults:(NSDictionary *)defaults {
-    if (!self.isInitialized) {
-        [self.userDefaults registerDefaults:defaults];
-
-        self.initialized = YES;
-    }
+    [self.userDefaults registerDefaults:defaults];
 }
 
 - (void)setConfigObject:(id)value forKey:(NSString *)key {
@@ -54,9 +49,7 @@
 }
 
 - (void)setConfigWithDictionary:(NSDictionary *)values {
-    for (NSString *key in values.allKeys) {
-        [self setConfigObject:values[key] forKey:key];
-    }
+    [self setStoreDefaults:values];
 }
 
 + (instancetype)store {
