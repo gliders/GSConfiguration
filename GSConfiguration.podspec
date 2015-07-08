@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = ['GSConfiguration/*.m', 'GSConfiguration/Transformers/*.m']
 
-  s.platform = :ios, '8.1'
+  s.platform = :ios, '8.0'
 
   s.source_files = 'GSConfiguration/**/*.{h,m}'
   s.public_header_files = 'GSConfiguration/**/*.h'

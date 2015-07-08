@@ -80,11 +80,23 @@
                                                     error:&jsonError];
 
     if (!jsonError) {
-        NSDictionary *configurationData = self.parserBlock(jsonData);
-
-        if (!configurationData) {
+        NSDictionary *configurationData = nil;
+        
+        if (self.parserBlock != nil)
+        {
+            configurationData = self.parserBlock(jsonData);
+            if (!configurationData) {
+                configurationData = @{};
+                GSLogWarn(@"JSON parser did not return a dictionary.");
+            }
+            
+        } else if ( [jsonData isKindOfClass:[NSDictionary class] ] )
+        {
+            configurationData = (NSDictionary *)jsonData;
+        } else
+        {
+            GSLogWarn(@"Unhandled json data found in response");
             configurationData = @{};
-            GSLogWarn(@"JSON parser did not return a dictionary.");
         }
 
         self.readyBlock(configurationData);
